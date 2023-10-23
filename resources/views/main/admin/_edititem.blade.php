@@ -72,7 +72,7 @@
                                             <option value="Duz" id="Duz">Duz</option>
                                             <option value="Box" id="Box">Box</option>
                                             <option value="Tube" id="Tube">Tube</option>
-                                            <option value="Set" id="Set">Tube</option>
+                                            <option value="Set" id="Set">Set</option>
                                             <option value="Pack" id="Pack">Pack</option>
                                             <option value="Roll" id="Roll">Roll</option>
                                             <option value="Ream" id="Ream">Ream</option>
