@@ -69,6 +69,8 @@ Route::post('/admin/pr', [AdministrationController::class, 'postreceipt'])->name
 Route::get('/admin/user', [AdministrationController::class, 'user'])->name('admin.user')->middleware('auth');
 Route::get('/admin/user/add', [AdministrationController::class, 'useradd'])->name('admin.useradd')->middleware('auth');
 Route::post('/admin/user/add', [AdministrationController::class, 'usersearch'])->name('admin.usersearch')->middleware('auth');
+Route::get('/admin/user/{id}', [AdministrationController::class, 'usershow'])->name('admin.usershow')->middleware('auth');
+Route::post('/admin/user/saveuser', [AdministrationController::class, 'saveuser'])->name('admin.saveuser')->middleware('auth');
 // Route::post('/admin/user/adduser', [AdministrationController::class, 'useradddb'])->name('admin.storeuser')->middleware('auth');
 Route::post('/admin/user/storeuser', [AdministrationController::class, 'storeuser'])->name('admin.storeuser')->middleware('auth');
 

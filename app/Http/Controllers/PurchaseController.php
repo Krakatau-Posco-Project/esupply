@@ -16,8 +16,13 @@ class PurchaseController extends Controller
 {
     public function direct()
     {
-        // return request()->ip();
-        if (request()->ip() == '172.21.25.50') {
+        // return request()->header('User-Agent');
+        // $aaa = explode(" ", request()->header('User-Agent'));
+        // return $aaa;
+        $user_agent = request()->header('User-Agent');
+        if (preg_match('/SM-T835/', $user_agent)) {
+            // if (request()->header('User-Agent') == '*SM-T835*') {
+            // if (request()->ip() == '172.21.25.205') {
             // if (request()->ip() == '172.21.25.205') {
             $items = Items::all();
             $cart = Cart::where('id_user', auth()->user()->id_user_me)->firstWhere('cart_type', 'Direct Pick Up');
@@ -127,7 +132,7 @@ class PurchaseController extends Controller
             'orgunit' =>  auth()->user()->orgunit,
             'status' =>  $status,
             'purchase_type' =>  $purchase_type,
-            'purpose' =>  $request->purpose,
+            // 'purpose' =>  $request->purpose,
             'reason' =>  $request->reason,
             'transno' =>  $lasttransno,
             'tl_approval' =>  $tl_approval,

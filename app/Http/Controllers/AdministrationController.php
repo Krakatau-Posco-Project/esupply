@@ -63,6 +63,7 @@ class AdministrationController extends Controller
         }
         // return $items;
     }
+
     public function saveitem(Request $request)
     {
         //
@@ -71,18 +72,30 @@ class AdministrationController extends Controller
 
 
         $destinationPath = 'storage/item/';
-        $files = $request->file('picture'); // will get all files
-        $file_name = $request->item_id . "." . $files->getClientOriginalExtension(); //Get file original name
-        $files->move($destinationPath, $file_name); // move files to destination folder
+        if ($request->file('picture')) {
+            $files = $request->file('picture'); // will get all files
+            $file_name = $request->item_id . "." . $files->getClientOriginalExtension(); //Get file original name
+            $files->move($destinationPath, $file_name); // move files to destination folder
+            Items::where('id', $request->item_id)
+                ->update([
+                    'item_name' => $request->item_name,
+                    'item_unit' => $request->item_unit,
+                    'item_stock' => $request->add_stock + $request->old_stock,
+                    'price' => $request->price,
+                    'picture' => $file_name
+                ]);
+        } else {
+            Items::where('id', $request->item_id)
+                ->update([
+                    'item_name' => $request->item_name,
+                    'item_unit' => $request->item_unit,
+                    'item_stock' => $request->add_stock + $request->old_stock,
+                    'price' => $request->price
+                ]);
+        }
 
-        Items::where('id', $request->item_id)
-            ->update([
-                'item_name' => $request->item_name,
-                'item_unit' => $request->item_unit,
-                'item_stock' => $request->add_stock + $request->old_stock,
-                'price' => $request->price,
-                'picture' => $file_name
-            ]);
+
+
 
 
         return to_route('admin.masteritem')->with('success', 'Item successfully updated');
@@ -258,5 +271,39 @@ class AdministrationController extends Controller
             return redirect('/admin/user/add')->with('success', 'Register successfull.');
             // return view('login.register');
         }
+    }
+    public function usershow($id)
+    {
+        //
+        $users = User::firstWhere('id', $id);
+        if ($users) {
+            return response()->json([
+                'status' => 200,
+                'user' => $users
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Data notfound',
+            ]);
+        }
+        // return $items;
+    }
+    public function saveuser(Request $request)
+    {
+        //
+
+        // return $request;
+
+
+
+        User::where('id', $request->iduser)
+            ->update([
+
+                'priv' => $request->privilege
+            ]);
+
+
+        return to_route('admin.user')->with('success', 'User successfully updated');
     }
 }

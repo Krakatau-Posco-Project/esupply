@@ -43,9 +43,7 @@
                 @endif
                 <div class="card-body">
 
-                    <button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-cart" id="aaaaaa"
-                        data-url="{{ route('items.showdirectcart', auth()->user()->id_user_me) }}"><i
-                            class="fas fa-cart-shopping"></i>&nbsp;View
+                    <button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-cart" id="aaaaaa" data-url="{{ route('items.showdirectcart', auth()->user()->id_user_me) }}"><i class="fas fa-cart-shopping"></i>&nbsp;View
                         cart</button>
                     <table id="tb_default" class="table table-bordered table-striped">
                         <thead>
@@ -62,8 +60,7 @@
                                     <td>{{ $items->item_code }}</td>
                                     <td>{{ $items->item_name }}</td>
                                     <td>{{ $items->item_unit }}</td>
-                                    <td><button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-addcart"
-                                            data-url="{{ route('items.show', $items->id) }}" {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
+                                    <td><button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-addcart" data-url="{{ route('items.show', $items->id) }}" {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
                                             <i class="fas fa-cart-shopping"></i></button></td>
                                 </tr>
                             @endforeach
@@ -88,8 +85,7 @@
                                 @csrf
                                 <input type="hidden" name="cartid" value="{{ $cart->id ?? '' }}">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="proposeCartLabel"><i
-                                            class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Purchase Request Proposal
+                                    <h5 class="modal-title" id="proposeCartLabel"><i class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Purchase Request Proposal
                                         Cart</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -158,14 +154,9 @@
                                                     <td width="10px">{{ $cartdetail->items[0]->item_code }}</td>
                                                     <td>{{ $cartdetail->items[0]->item_name }}</td>
                                                     <td>{{ $cartdetail->items[0]->item_unit }}</td>
-                                                    <td><input name="qty[{{ $cartdetail->items[0]->id }}]" type="number"
-                                                            value="{{ $cartdetail->qty }}" size="5"
-                                                            style="width: 3em"></td>
+                                                    <td><input name="qty[{{ $cartdetail->items[0]->id }}]" type="number" value="{{ $cartdetail->qty }}" size="5" style="width: 3em"></td>
                                                     <td>
-                                                        <center><a href="#" class="btn-delete"
-                                                                data-url="{{ route('cart.delete', $cartdetail->id) }}"
-                                                                uid="row{{ $cartdetail->id }}"><i
-                                                                    class="fas fa-trash"></i></a></center>
+                                                        <center><a href="#" class="btn-delete" data-url="{{ route('cart.delete', $cartdetail->id) }}" uid="row{{ $cartdetail->id }}"><i class="fas fa-trash"></i></a></center>
                                                     </td>
                                                     {{-- <td>{{ $cartdetail->item_name }}</td>
                                             <td>{{ $cartdetail->item_unit }}</td> --}}
@@ -184,11 +175,11 @@
                                             </tr>
                                         @endif
 
-                                        <tr>
+                                        {{-- <tr>
                                             <td><b>Purpose</b></td>
                                             <td colspan="4"><input type="text" name="purpose" id="purpose" required>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr>
                                             <td><b>Reason</b></td>
@@ -200,8 +191,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <input type="hidden" name="carttype" value="propose">
-                                    <input type="submit" {{ $submitdis }} class="btn btn-info btn-sm"
-                                        value="Submit Request">
+                                    <input type="submit" {{ $submitdis }} class="btn btn-info btn-sm" value="Submit Request">
                                 </div>
                             </form>
                         </div>

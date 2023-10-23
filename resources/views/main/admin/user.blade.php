@@ -59,6 +59,7 @@
                                 <th>username</th>
                                 <th>Organization Unit</th>
                                 <th>Privilege</th>
+                                <th>Privilege</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->orgunit }}</td>
+
                                     <td>
                                         @switch($user->priv)
                                             @case('user')
@@ -91,6 +93,8 @@
 
 
                                     </td>
+                                    <td> <button title="Edit Item" type="button" class="btn btn-info btn-sm btn-addcart" data-url="{{ route('admin.usershow', $user->id) }}">
+                                            <i class="fas fa-pencil"></i></button></td>
                                     {{-- <td>
                                         <button title="Edit Item" type="button" class="btn btn-info btn-sm btn-addcart"
                                             data-url="{{ route('admin.itemshow', $items->id) }}">
@@ -110,6 +114,7 @@
                         </tfoot>
                     </table>
                 </div>
+                @include('main.admin._edituser')
                 {{-- @include('main.admin._edititem')
                 <div class="modal fade" id="addItemModal" role="dialog" aria-labelledby="directAddCart" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">

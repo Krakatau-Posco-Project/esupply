@@ -26,8 +26,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h4>
-                                        <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco"
-                                            class="brand-image" style="height: 20px;">
+                                        <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco" class="brand-image" style="height: 20px;">
                                         <small class="float-right">Date: <span id="datetransaction"></span> </small>
                                     </h4>
                                 </div>
@@ -95,15 +94,11 @@
                             <div class="row">
                                 <!-- accepted payments column -->
                                 <div class="col-6">
-                                    <p class="lead">Request Purpose:</p>
-                                    {{-- <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                        <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                        <img src="../../dist/img/credit/paypal2.png" alt="Paypal"> --}}
+                                    {{-- <p class="lead">Request Purpose:</p>
 
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                                         <span id="purpose"></span>
-                                    </p>
+                                    </p> --}}
                                     <p class="lead">Request Reason:</p>
 
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
@@ -329,8 +324,8 @@
                                 .transaction
                                 .tlgam_approver_name + ' (' + response.transaction
                                 .tlgam_approval + ')';
-                            document.getElementById("purpose").innerHTML = response.transaction
-                                .purpose;
+                            // document.getElementById("purpose").innerHTML = response.transaction
+                            //     .purpose;
                             document.getElementById("reason").innerHTML = response.transaction
                                 .reason;
                             document.getElementById("tlnote").innerHTML = response.transaction
