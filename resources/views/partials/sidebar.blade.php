@@ -42,7 +42,7 @@
             </div>
 
             <div class="info" style="font-size: 0.65rem; line-height:0.5rem">
-                <a href="route('editprofile')" class="d-block" style="font-size: 0.9rem;">{{ auth()->user()->name }}</a>
+                <a href="" class="d-block" style="font-size: 0.9rem;">{{ auth()->user()->name }}</a>
                 <br>
                 <span class="text-dark">{{ auth()->user()->orgunit }}</span>
             </div>
