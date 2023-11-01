@@ -16,11 +16,11 @@ class PurchaseController extends Controller
 {
     public function direct()
     {
-        return request()->header('User-Agent');
+        // return request()->header('User-Agent');
         // $aaa = explode(" ", request()->header('User-Agent'));
         // return $aaa;
         $user_agent = request()->header('User-Agent');
-        if (preg_match('/SM-T835/', $user_agent)) {
+        if (preg_match('/SM-T515/', $user_agent)) {
             // if (request()->header('User-Agent') == '*SM-T835*') {
             // if (request()->ip() == '172.21.25.205') {
             // if (request()->ip() == '172.21.25.205') {
