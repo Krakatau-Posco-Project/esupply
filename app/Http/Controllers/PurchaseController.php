@@ -16,7 +16,7 @@ class PurchaseController extends Controller
 {
     public function direct()
     {
-        // return request()->header('User-Agent');
+        return request()->header('User-Agent');
         // $aaa = explode(" ", request()->header('User-Agent'));
         // return $aaa;
         $user_agent = request()->header('User-Agent');

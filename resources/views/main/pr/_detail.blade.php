@@ -26,11 +26,11 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h4>
-                                            <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco"
-                                                class="brand-image" style="height: 20px;">
+                                            <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco" class="brand-image" style="height: 20px;">
                                             <small class="float-right">Date: <span id="datetransaction"></span> </small>
                                         </h4>
                                     </div>
+
                                     <!-- /.col -->
                                 </div>
                                 <!-- info row -->

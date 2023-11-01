@@ -79,6 +79,14 @@
                                         </select>
                                         {{-- <input type="text" name="item_unit" id="item_unit"> --}}
                                     </td>
+                                    <td>Stock Reminder</td>
+                                    <td>:</td>
+                                    <td><input type="text" name="item_stock_reminder" id="item_stock_reminder"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>Picture</td>
                                     <td>:</td>
                                     <td><input type="file" name="picture" id="picture" accept="image/png, image/gif, image/jpeg"></td>
@@ -140,6 +148,7 @@
                         document.getElementById("item_stock").innerHTML = response.items.item_stock;
                         document.getElementById("item_unit").value = response.items.item_unit;
                         document.getElementById("price").value = response.items.price;
+                        document.getElementById("item_stock_reminder").value = response.items.item_stock_reminder;
                         document.getElementById(response.items.item_unit).selected;
                         // var myloginid = document.getElementById("myloginid").innerHTML;
 

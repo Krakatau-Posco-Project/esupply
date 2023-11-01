@@ -56,18 +56,20 @@
                                 <th>Items</th>
                                 <th>Unit</th>
                                 <th>Stock</th>
+                                <th>Stock Reminder</th>
                                 <th>Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($items as $items)
-                                <tr>
+                                <tr @if ($items->item_stock < $items->item_stock_reminder) style="background-color: #ffb8c2" @endif>
                                     <td><a href="#" class="btn-showpicture" data-url="{{ asset('storage/item') }}/{{ $items->picture }}"><img src="{{ asset('storage/item') }}/{{ $items->picture }}" alt="" style="width: 130px;"></a></td>
                                     <td>{{ $items->item_code }}</td>
                                     <td>{{ $items->item_name }}</td>
                                     <td>{{ $items->item_unit }}</td>
                                     <td>{{ $items->item_stock }}</td>
+                                    <td>{{ $items->item_stock_reminder }}</td>
                                     <td>{{ $items->price }}</td>
                                     <td>
                                         <button title="Edit Item" type="button" class="btn btn-info btn-sm btn-addcart" data-url="{{ route('admin.itemshow', $items->id) }}">
@@ -84,6 +86,7 @@
                                 <th>Items</th>
                                 <th>Unit</th>
                                 <th>Stock</th>
+                                <th>Stock Reminder</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -144,8 +147,8 @@
 
 
                                                 /* .tablecart tr th {
-                                                                                                                                                                                                    border-bottom: 1px solid black;
-                                                                                                                                                                                                } */
+                                                                                                                                                                                                                        border-bottom: 1px solid black;
+                                                                                                                                                                                                                    } */
                                             </style>
                                             <table class="tablecart">
                                                 <tr>

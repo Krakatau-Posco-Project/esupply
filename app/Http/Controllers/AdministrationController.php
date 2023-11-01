@@ -81,6 +81,7 @@ class AdministrationController extends Controller
                     'item_name' => $request->item_name,
                     'item_unit' => $request->item_unit,
                     'item_stock' => $request->add_stock + $request->old_stock,
+                    'item_stock_reminder' => $request->item_stock_reminder,
                     'price' => $request->price,
                     'picture' => $file_name
                 ]);
@@ -90,6 +91,7 @@ class AdministrationController extends Controller
                     'item_name' => $request->item_name,
                     'item_unit' => $request->item_unit,
                     'item_stock' => $request->add_stock + $request->old_stock,
+                    'item_stock_reminder' => $request->item_stock_reminder,
                     'price' => $request->price
                 ]);
         }

@@ -4,7 +4,20 @@
             {{-- <form action="" method="POST"> --}}
             {{-- @csrf --}}
             <div class="modal-header">
-                <h5 class="modal-title" id="detailTransactionLabel"><span id="purchase_type"></span></h5>
+                <h5 class="modal-title" id="detailTransactionLabel"><span id="purchase_type"></span></h5>&nbsp;&nbsp;
+                <form name="form1" id="form1" method="POST" action="{{ route('download.purchase') }}">
+                    @csrf
+                    <input type="hidden" name="transaction_id" id="transaction_id">
+                    {{-- <input type="hidden" name="slug" id="slug" value="{{ $assesment->slug }}"> --}}
+                    <button class="btn btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                            <path d="M7 11l5 5l5 -5"></path>
+                            <path d="M12 4l0 12"></path>
+                        </svg>
+                    </button>
+                </form>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -30,6 +43,7 @@
                                         <small class="float-right">Date: <span id="datetransaction"></span> </small>
                                     </h4>
                                 </div>
+
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
@@ -303,6 +317,9 @@
                             // document.getElementById("transactionidappr").value = response.transaction
                             //     .id;
                             // document.getElementById("transactionidrej").value = response.transaction.id;
+                            document.getElementById("transaction_id").value = response
+                                .transaction
+                                .id;
                             document.getElementById("transactionnumber").innerHTML = response
                                 .transaction
                                 .transactionnumber;
@@ -351,7 +368,8 @@
                                 currency: 'IDR',
                             });
                             const arrayiddetail = [];
-                            var sumprice = 0;
+                            let inttotalprice = 0;
+                            let sumprice = 0;
                             var totalitems = 0;
                             for (var i = 0; i < arraylength; i++) {
 
@@ -397,10 +415,11 @@
                                 cell8.innerHTML = idrFormat.format(response.transaction.detail[i]
                                     .transaction_price);
                                 var totalprice = response.transaction.detail[i].transaction_total_price;
+                                // inttotalprice = response.transaction.detail[i].transaction_total_price;
                                 cell9.innerHTML = idrFormat.format(totalprice);
                                 // cell10.innerHTML = response.transaction.detail[i].items[0].vendor;
                                 // var hidden = document.createElement("INPUT");
-                                sumprice += totalprice;
+                                sumprice += response.transaction.detail[i].transaction_total_price * 1;
                                 sumitems = response.transaction.detail[i].tlgam_qty * 1;
                                 totalitems += sumitems;
                                 // var x = document.createElement("INPUT");
@@ -439,6 +458,7 @@
                             document.getElementById("idtransaction").value = response.transaction.id;
                             document.getElementById("receipt").value = response.transaction.receipt;
                             document.getElementById("totalitems").innerHTML = totalitems;
+                            // document.getElementById("total").innerHTML = sumprice;
                             document.getElementById("total").innerHTML = idrFormat.format(sumprice);
 
 

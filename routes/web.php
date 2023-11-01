@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
@@ -57,6 +58,7 @@ Route::post('/approval/pic', [ApprovalController::class, 'approvepic'])->name('a
 Route::post('/approval/tluser', [ApprovalController::class, 'approvetluser'])->name('approval.approvetluser')->middleware('tluser');
 Route::post('/approval/tlgam', [ApprovalController::class, 'approvetlgam'])->name('approval.approvetlgam')->middleware('tlgam');
 Route::post('/approval/savedata/tlgam', [ApprovalController::class, 'savedatatlgam'])->name('approval.savedatatlgam')->middleware('tlgam');
+Route::post('/approval/download', [DownloadController::class, 'purchase'])->name('download.purchase')->middleware('auth');
 
 
 Route::post('/admin/additem', [AdministrationController::class, 'additem'])->name('admin.additem')->middleware('auth');
