@@ -26,8 +26,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h4>
-                                        <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco"
-                                            class="brand-image" style="height: 20px;">
+                                        <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco" class="brand-image" style="height: 20px;">
                                         <small class="float-right">Date: <span id="datetransaction"></span> </small>
                                     </h4>
                                 </div>
@@ -74,9 +73,9 @@
                                                 <th>Product</th>
                                                 <th>Unit</th>
                                                 <th style="text-align: center">Qty</th>
-                                                <th style="text-align: center">TL Adjustment</th>
+                                                <th style="text-align: center" id="thtl">TL Adjustment</th>
                                                 <th style="text-align: center">GAM PIC Adjustment</th>
-                                                <th style="text-align: center">GAM TL Adjustment</th>
+                                                <th style="text-align: center" id="thgamtl">GAM TL Adjustment</th>
                                                 {{-- <th style="text-align: center">Apply Adjustment</th> --}}
                                             </tr>
                                         </thead>
@@ -258,6 +257,15 @@
                             // alert(response.transaction.id);
                             $("#detailTable tbody tr").remove();
                             // $("#detailTable:not(:first)").remove();
+
+                            if (response.transaction.purchase_type == "Direct Pick Up") {
+                                document.getElementById("thtl").style = "display:none;";
+                                document.getElementById("thgamtl").style = "display:none;";
+                            } else {
+                                document.getElementById("thtl").style = "display:block;";
+                                document.getElementById("thgamtl").style = "display:block;";
+                            }
+
                             var tableheader = document.getElementById("detailTable")
                                 .getElementsByTagName(
                                     'thead')[0];
@@ -329,6 +337,7 @@
                                 var cell6 = row.insertCell(5);
                                 var cell7 = row.insertCell(6);
                                 var cell8 = row.insertCell(7);
+
                                 if (
                                     response.transaction.detail[i].qty == response.transaction.detail[i]
                                     .pic_qty &&
@@ -348,9 +357,15 @@
                                 cell3.innerHTML = response.transaction.detail[i].items[0].item_unit;
                                 cell4.innerHTML = response.transaction.detail[i].qty;
                                 // cell5.innerHTML = response.transaction.detail[i].qty;
-                                cell5.innerHTML = response.transaction.detail[i].tluser_qty; //tl adjustment
-                                cell7.innerHTML = response.transaction.detail[i]
-                                    .tlgam_qty; //gam tl adjustment
+                                if (response.transaction.purchase_type == "Direct Pick Up") {
+                                    cell5.setAttribute("style", "display: none;"); //tl adjustment
+                                    cell7.setAttribute("style", "display: none;");
+                                } else {
+                                    cell5.innerHTML = response.transaction.detail[i].tluser_qty; //tl adjustment
+                                    cell7.innerHTML = response.transaction.detail[i].tlgam_qty; //gam tl adjustment
+                                }
+                                // cell5.innerHTML = response.transaction.detail[i].tluser_qty; //tl adjustment
+                                // cell7.innerHTML = response.transaction.detail[i].tlgam_qty; //gam tl adjustment
                                 // var hidden = document.createElement("INPUT");
                                 var x = document.createElement("INPUT");
                                 var iddetail = response.transaction.detail[i].id;

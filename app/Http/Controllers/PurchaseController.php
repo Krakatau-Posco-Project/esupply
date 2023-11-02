@@ -39,6 +39,22 @@ class PurchaseController extends Controller
                 "cartdetail" => $cartdetail,
                 "cart" => $cart
             ]);
+        } else if (request()->ip() == '::1' || request()->ip() == '172.21.25.205') {
+            $items = Items::all();
+            $cart = Cart::where('id_user', auth()->user()->id_user_me)->firstWhere('cart_type', 'Direct Pick Up');
+            if ($cart) {
+                $idcart = $cart->id;
+            } else {
+                $idcart = null;
+            }
+            $cartdetail = CartDetail::with(['items'])->where('cart_id', $idcart)->get();
+            // return $cartdetail;
+            return view('main.pr.direct', [
+                "title" =>  "Direct Pick Up",
+                "items" => $items,
+                "cartdetail" => $cartdetail,
+                "cart" => $cart
+            ]);
         } else {
             return view('main.pr.emptydirect', [
                 "title" =>  "Direct Pick Up"
@@ -162,12 +178,12 @@ class PurchaseController extends Controller
             ]));
             $newdatadetail->save(); //create transaction detail
 
-            if ($request->carttype == 'direct') {
-                $searchid = Items::firstWhere('id', $x);
-                $lasstock = $searchid->item_stock - $val;
-                Items::where('id', $x)
-                    ->update(['item_stock' => $lasstock]);
-            }
+            // if ($request->carttype == 'direct') {
+            //     $searchid = Items::firstWhere('id', $x);
+            //     $lasstock = $searchid->item_stock - $val;
+            //     Items::where('id', $x)
+            //         ->update(['item_stock' => $lasstock]);
+            // }
         }
         CartDetail::where('cart_id',  $request->cartid)->delete();
         Cart::where('id',  $request->cartid)->delete();

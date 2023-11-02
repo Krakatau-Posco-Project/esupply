@@ -29,6 +29,7 @@
                     {{-- <p>Welcome, {{ auth()->user()->priv }}</p> --}}
                     <div class="row">
                         <center>
+                            {{ request()->ip() }}
                             <h4 style="text-align: center">For Direct Pickup, please input directly on GAM Team Tab / Computer
                                 (Located in GAM Office, PTKP
                                 HQ
