@@ -20,10 +20,10 @@ class PurchaseController extends Controller
         // $aaa = explode(" ", request()->header('User-Agent'));
         // return $aaa;
         $user_agent = request()->header('User-Agent');
-        if (preg_match('/SM-T515/', $user_agent)) {
-            // if (request()->header('User-Agent') == '*SM-T835*') {
-            // if (request()->ip() == '172.21.25.205') {
-            // if (request()->ip() == '172.21.25.205') {
+        // if (preg_match('/SM-T515/', $user_agent)) {
+        // if (request()->header('User-Agent') == '*SM-T835*') {
+        // if (request()->ip() == '172.21.25.205') {
+        if (request()->ip() == '172.21.25.41') {
             $items = Items::all();
             $cart = Cart::where('id_user', auth()->user()->id_user_me)->firstWhere('cart_type', 'Direct Pick Up');
             if ($cart) {
