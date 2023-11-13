@@ -16,6 +16,7 @@ class RegisterController extends Controller
             return redirect('/login')->with('nosession', 'ID already registered. Please login using your Employee ID as username & password');
         } else {
             $employee = Http::get(config('api.employee.base_url') . $request->idemp . '')->object();
+            // return $employee;
             if (isset($employee->status)) {
                 return back()->with('loginError', 'Data not found');
             } else {
@@ -41,7 +42,8 @@ class RegisterController extends Controller
                 'orgunit' =>  $request->getorgunit,
                 'id_user_me_approver' =>  $request->getidapprover,
                 'password' => Hash::make($request->getidemp),
-                'username' =>  $request->getidemp
+                'username' =>  $request->getidemp,
+                'ssohash' =>  $request->newhash
             ]);
             $newdata->save();
             //approver 1
@@ -61,7 +63,8 @@ class RegisterController extends Controller
                         'orgunit' =>  $approver->orgunit,
                         'id_user_me_approver' =>  $approver->appr1,
                         'password' => Hash::make($approver->id_emp),
-                        'username' =>  $approver->id_emp
+                        'username' =>  $approver->id_emp,
+                        'ssohash' =>  $approver->newhash
                     ]);
                     $newdataapprover->save();
                 } else {
@@ -73,7 +76,8 @@ class RegisterController extends Controller
                         'orgunit' =>  $approver->orgunit,
                         'id_user_me_approver' =>  $approver->appr1,
                         'password' => Hash::make($approver->id_emp),
-                        'username' =>  $approver->id_emp
+                        'username' =>  $approver->id_emp,
+                        'ssohash' =>  $approver->newhash
                     ]);
                     $newdataapprover->save();
                     //approver2
@@ -89,7 +93,8 @@ class RegisterController extends Controller
                                 'orgunit' =>  $approver2->orgunit,
                                 'id_user_me_approver' =>  $approver2->appr1,
                                 'password' => Hash::make($approver2->id_emp),
-                                'username' =>  $approver2->id_emp
+                                'username' =>  $approver2->id_emp,
+                                'ssohash' =>  $approver2->newhash
                             ]);
                             $newdataapprover2->save();
                         } else {
@@ -100,7 +105,8 @@ class RegisterController extends Controller
                                 'orgunit' =>  $approver2->orgunit,
                                 'id_user_me_approver' =>  $approver2->appr1,
                                 'password' => Hash::make($approver2->id_emp),
-                                'username' =>  $approver2->id_emp
+                                'username' =>  $approver2->id_emp,
+                                'ssohash' =>  $approver2->newhash
                             ]);
                             $newdataapprover2->save();
                             //approver3
@@ -116,7 +122,8 @@ class RegisterController extends Controller
                                         'orgunit' =>  $approver3->orgunit,
                                         'id_user_me_approver' =>  $approver3->appr1,
                                         'password' => Hash::make($approver3->id_emp),
-                                        'username' =>  $approver3->id_emp
+                                        'username' =>  $approver3->id_emp,
+                                        'ssohash' =>  $approver3->newhash
                                     ]);
                                     $newdataapprover3->save();
                                 } else {
@@ -127,7 +134,8 @@ class RegisterController extends Controller
                                         'orgunit' =>  $approver3->orgunit,
                                         'id_user_me_approver' =>  $approver3->appr1,
                                         'password' => Hash::make($approver3->id_emp),
-                                        'username' =>  $approver3->id_emp
+                                        'username' =>  $approver3->id_emp,
+                                        'ssohash' =>  $approver3->newhash
                                     ]);
                                     $newdataapprover3->save();
                                 }

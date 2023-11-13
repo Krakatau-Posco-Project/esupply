@@ -87,3 +87,5 @@ Route::get('/notif', [NotificationController::class, 'notification'])->name('tes
 Route::get('redirlog', function () {
     return redirect('/login')->with('nosession', 'Invalid Session');
 })->name("redirlog");
+
+Route::get('/sso', [LoginController::class, 'checksso'])->name('sso.check');

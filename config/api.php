@@ -13,9 +13,14 @@ return [
     //     'compact' => 'http://172.21.25.87:8080/employee-api/public/api/employeesByIdCompact/',
     // ],
     'employee' => [
-        'base_url' => 'http://172.21.25.87:8080/employee-api/public/api/employees/',
-        'name_url' => 'http://172.21.25.87:8080/employee-api/public/api/employeesByName/',
-        'id_url' => 'http://172.21.25.87:8080/employee-api/public/api/employeesById/',
-        'compact' => 'http://172.21.25.87:8080/employee-api/public/api/employeesByIdCompact/',
+        // 'base_url' => 'http://172.21.25.87:8080/employee-api/public/api/employees/',
+        // 'name_url' => 'http://172.21.25.87:8080/employee-api/public/api/employeesByName/',
+        // 'id_url' => 'http://172.21.25.87:8080/employee-api/public/api/employeesById/',
+        // 'compact' => 'http://172.21.25.87:8080/employee-api/public/api/employeesByIdCompact/',
+        // 'base_url_hash' => 'http://172.21.23.73/employee-api/public/api/employeesbyhash/',
+        'base_url' => 'http://172.21.23.73/employee-api/public/api/employees/',
+        'base_url_hash' => 'http://172.21.23.73/employee-api/public/api/employeesbyhash/',
+        'id_url' => 'http://172.21.23.73/employee-api/public/api/employeesById/',
+        'compact' => 'http://172.21.23.73/employee-api/public/api/employeesByIdCompact/',
     ],
 ];

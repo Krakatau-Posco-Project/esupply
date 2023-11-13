@@ -8,8 +8,7 @@
     <title>Login</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="AdminLTE/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
@@ -45,8 +44,7 @@
 
         <div class="card card-outline card-success">
             <div class="card-header text-center">
-                <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco" class="brand-image"
-                    style="height: 22px;"><br>
+                <img src="{{ asset('pic/') . '/logokp.png' }}" alt="Krakatau Posco" class="brand-image" style="height: 22px;"><br>
                 <a href="#" class="h1">E-Supply</a><br>
                 <a href="#" class="h4">General Services</a><br>
                 <a href="#" class="h5">Registration</a>
@@ -58,8 +56,7 @@
                 <form action="{{ route('register.search') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" name="idemp" class="form-control" placeholder="ID Employee" autofocus
-                            required value="{{ old('username') }}">
+                        <input type="text" name="idemp" class="form-control" placeholder="ID Employee" autofocus required value="{{ old('username') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -92,8 +89,7 @@
                     <form action="{{ route('register.store') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
-                            <input type="text" name="getidemp" class="form-control" placeholder="ID Employee"
-                                autofocus required value="{{ $employee->id_emp }}" readonly>
+                            <input type="text" name="getidemp" class="form-control" placeholder="ID Employee" autofocus required value="{{ $employee->id_emp }}" readonly>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -101,12 +97,10 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="getname" class="form-control" placeholder="ID Employee" required
-                                value="{{ $employee->name }}" readonly>
+                            <input type="text" name="getname" class="form-control" placeholder="ID Employee" required value="{{ $employee->name }}" readonly>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="getorgunit" class="form-control" placeholder="ID Employee"
-                                required value="{{ $employee->orgunit }}" readonly>
+                            <input type="text" name="getorgunit" class="form-control" placeholder="ID Employee" required value="{{ $employee->orgunit }}" readonly>
                         </div>
 
                         <div class="row">
@@ -117,6 +111,7 @@
                             <div class="col-4">
                                 <input type="hidden" name="getiduserme" value="{{ $employee->id_user }}">
                                 <input type="hidden" name="getidapprover" value="{{ $employee->appr1 }}">
+                                <input type="hidden" name="newhash" value="{{ $employee->newhash }}">
                                 <button type="submit" class="btn btn-primary btn-block">Register</button>
                             </div>
                             <!-- /.col -->
