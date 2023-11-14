@@ -89,3 +89,4 @@ Route::get('redirlog', function () {
 })->name("redirlog");
 
 Route::get('/sso', [LoginController::class, 'checksso'])->name('sso.check');
+Route::get('/employee', [LoginController::class, 'employee'])->name('employee.check');

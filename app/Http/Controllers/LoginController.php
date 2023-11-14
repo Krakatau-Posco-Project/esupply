@@ -179,4 +179,30 @@ class LoginController extends Controller
 
         }
     }
+
+    public function employee()
+    {
+        $employee = Http::get(config('api.employee.base_url'))->object();
+        foreach ($employee as $list) {
+            // $arrays[$key] = $value;
+            // echo $list->id_user . "<br>";
+            $check = User::firstWhere('id_user_me', $list->id_user);
+            if ($check) {
+                echo $list->name . " exist<br>";
+            } else {
+                $newdataapprover3 = new User([
+                    'id_user_me' =>  $list->id_user,
+                    'name' =>  $list->name,
+                    'orgunit' =>  $list->orgunit,
+                    'id_user_me_approver' =>  $list->appr1,
+                    'password' => Hash::make($list->id_emp),
+                    'username' =>  $list->id_emp,
+                    'ssohash' =>  $list->newhash
+                ]);
+                $newdataapprover3->save();
+                echo $list->name . " done<br>";
+            }
+        }
+        // return $employee;
+    }
 }
