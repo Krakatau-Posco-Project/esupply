@@ -180,7 +180,7 @@ class LoginController extends Controller
         }
     }
 
-    public function employee()
+    public function employee111()
     {
         $employee = Http::get(config('api.employee.base_url'))->object();
         foreach ($employee as $list) {
