@@ -24,7 +24,7 @@ class AdministrationController extends Controller
     public function adminpr()
     {
         // $transaction = Transaction::where('pic_approval', 'Pending')->get();
-        $transaction = Transaction::where('purchase_type', 'Purchase Request Proposal')->get();
+        $transaction = Transaction::where('purchase_type', 'Purchase Request Proposal')->orderBy('created_at', 'desc')->get();
         return view('main.admin.pr', [
             "title" =>  "Purchase Request List",
             "transaction" => $transaction
