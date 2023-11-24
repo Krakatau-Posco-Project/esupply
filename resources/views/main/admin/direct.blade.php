@@ -144,6 +144,11 @@
                 "order": [
                     [0, 'desc']
                 ],
+                columnDefs: [{
+                    target: 0,
+                    visible: false,
+                    searchable: false
+                }]
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
