@@ -47,7 +47,7 @@
                     <table id="tb_default" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th style="display: none">ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
@@ -63,7 +63,7 @@
                         <tbody>
                             @foreach ($transaction as $transaction)
                                 <tr>
-                                    <td>{{ $transaction->id }}</td>
+                                    <td style="display: none">{{ $transaction->id }}</td>
                                     <td>{{ $transaction->id_emp }}</td>
                                     <td>{{ $transaction->name }}</td>
                                     <td>{{ $transaction->orgunit }}</td>
@@ -87,7 +87,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
+                                <th style="display: none">ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
