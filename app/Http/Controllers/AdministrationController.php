@@ -14,7 +14,7 @@ class AdministrationController extends Controller
     public function admindirect()
     {
         // $transaction = Transaction::where('pic_approval', 'Pending')->get();
-        $transaction = Transaction::where('purchase_type', 'Direct Pick Up')->orderBy('created_at')->get();
+        $transaction = Transaction::where('purchase_type', 'Direct Pick Up')->orderBy('created_at', 'desc')->get();
         return view('main.admin.direct', [
             "title" =>  "Direct Pick Up List",
             "transaction" => $transaction
