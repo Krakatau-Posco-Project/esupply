@@ -47,6 +47,7 @@
                     <table id="tb_default" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
@@ -62,6 +63,7 @@
                         <tbody>
                             @foreach ($transaction as $transaction)
                                 <tr>
+                                    <td>{{ $transaction->id }}</td>
                                     <td>{{ $transaction->id_emp }}</td>
                                     <td>{{ $transaction->name }}</td>
                                     <td>{{ $transaction->orgunit }}</td>
@@ -85,6 +87,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
@@ -138,9 +141,9 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                // "order": [
-                //     [5, 'desc']
-                // ],
+                "order": [
+                    [1, 'desc']
+                ],
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
