@@ -66,22 +66,17 @@
                                     <td>{{ $transaction->name }}</td>
                                     <td>{{ $transaction->orgunit }}</td>
                                     <td>{{ $transaction->purchase_type }}</td>
-                                    <td><a href="#" class="btn-detail"
-                                            data-url="{{ route('transaction.detail', $transaction->id) }}"
-                                            uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a>
+                                    <td><a href="#" class="btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a>
                                     </td>
                                     <td style="text-align: center">{{ $transaction->created_at }}</td>
                                     <td style="text-align: center;">
-                                        {{ $transaction->tl_approver_name }}<br><span
-                                            @if ($transaction->tl_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tl_approval }}</span>
+                                        {{ $transaction->tl_approver_name }}<br><span @if ($transaction->tl_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tl_approval }}</span>
                                     </td>
                                     <td style="text-align: center">
-                                        {{ $transaction->pic_approver_name }}<br><span
-                                            @if ($transaction->pic_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->pic_approval }}</span>
+                                        {{ $transaction->pic_approver_name }}<br><span @if ($transaction->pic_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->pic_approval }}</span>
                                     </td>
                                     <td style="text-align: center">
-                                        {{ $transaction->tlgam_approver_name }}<br><span
-                                            @if ($transaction->tlgam_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tlgam_approval }}</span>
+                                        {{ $transaction->tlgam_approver_name }}<br><span @if ($transaction->tlgam_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tlgam_approval }}</span>
                                     </td>
 
                                 </tr>
@@ -143,9 +138,9 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "order": [
-                    [1, 'asc']
-                ],
+                // "order": [
+                //     [1, 'asc']
+                // ],
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
