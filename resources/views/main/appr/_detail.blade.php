@@ -202,7 +202,7 @@
                 document.getElementById("approve").submit();
             });
             $(document).on('click', '#b-reject', function(e) {
-                var getvaluefromtext = document.getElementById("inputnote").value;
+                // var getvaluefromtext = document.getElementById("inputnote").value;
                 document.getElementById("hiddennotereject").value = getvaluefromtext;
                 var notevalue = document.getElementById("hiddennotereject").value;
                 document.getElementById("reject").submit();
