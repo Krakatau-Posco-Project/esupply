@@ -47,6 +47,7 @@
                     <table id="tb_default" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th style="display: none">ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
@@ -61,13 +62,12 @@
                         <tbody>
                             @foreach ($transaction as $transaction)
                                 <tr>
+                                    <td style="display: none">{{ $transaction->id }}</td>
                                     <td>{{ $transaction->id_emp }}</td>
                                     <td>{{ $transaction->name }}</td>
                                     <td>{{ $transaction->orgunit }}</td>
                                     <td>{{ $transaction->purchase_type }}</td>
-                                    <td><a href="#" class="btn-detail"
-                                            data-url="{{ route('transaction.detail', $transaction->id) }}"
-                                            uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a></td>
+                                    <td><a href="#" class="btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a></td>
                                     <td>{{ $transaction->tl_approval }}
                                         @if ($transaction->tl_approval == 'Pending')
                                             {{-- <span class="badge badge-danger right">!</span> --}}
@@ -77,9 +77,7 @@
                                     </td>
                                     <td>{{ $transaction->pic_approval }}</td>
                                     <td>{{ $transaction->tlgam_approval }}</td>
-                                    <td><button title="Approve" type="button" class="btn btn-info btn-sm btn-detail"
-                                            data-url="{{ route('transaction.detail', $transaction->id) }}"
-                                            {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
+                                    <td><button title="Approve" type="button" class="btn btn-info btn-sm btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
                                             <i class="fas fa-stamp"></i></button></td>
                                 </tr>
                             @endforeach
@@ -87,6 +85,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th style="display: none">ID</th>
                                 <th>ID Employee</th>
                                 <th>Name</th>
                                 <th>Org Unit</th>
@@ -140,8 +139,13 @@
                 "lengthChange": false,
                 "autoWidth": false,
                 "order": [
-                    [1, 'asc']
+                    [0, 'desc']
                 ],
+                columnDefs: [{
+                    target: 0,
+                    visible: false,
+                    searchable: false
+                }],
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
