@@ -102,7 +102,7 @@ class PurchaseController extends Controller
         // $datenow = date("l jS \of F Y h:i:s A");
         $datenow = date("dmyhis");
         // return $datenow;
-        $lasttransaction = Transaction::whereDate('created_at', Carbon::today())->orderBy('transno', 'desc')->first();
+        $lasttransaction = Transaction::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
         if ($lasttransaction) {
             $lasttransno = $lasttransaction->transno + 1;
         } else {
