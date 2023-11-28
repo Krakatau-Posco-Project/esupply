@@ -59,6 +59,7 @@ Route::post('/approval/tluser', [ApprovalController::class, 'approvetluser'])->n
 Route::post('/approval/tlgam', [ApprovalController::class, 'approvetlgam'])->name('approval.approvetlgam')->middleware('tlgam');
 Route::post('/approval/savedata/tlgam', [ApprovalController::class, 'savedatatlgam'])->name('approval.savedatatlgam')->middleware('tlgam');
 Route::post('/approval/download', [DownloadController::class, 'purchase'])->name('download.purchase')->middleware('auth');
+Route::get('/approval/pic2', [ApprovalController::class, 'pic'])->name('approval.pic2');
 
 
 Route::post('/admin/additem', [AdministrationController::class, 'additem'])->name('admin.additem')->middleware('auth');
