@@ -187,7 +187,8 @@
     @push('child-scripts')
         <script>
             $(document).on('click', '#b-approve', function(e) {
-
+                // var getvaluefromtext = document.getElementById("inputnote").value;
+                // document.getElementById("hiddennoteapprove").value = getvaluefromtext;
                 var notevalue = document.getElementById("hiddennoteapprove").value;
                 var idget = document.getElementById("hiddenarrayapprove").value;
                 var arrayiddetailget = idget.split(',');
@@ -201,7 +202,9 @@
                 document.getElementById("approve").submit();
             });
             $(document).on('click', '#b-reject', function(e) {
-
+                // var getvaluefromtext = document.getElementById("inputnote").value;
+                // document.getElementById("hiddennotereject").value = getvaluefromtext;
+                // var notevalue = document.getElementById("hiddennotereject").value;
                 document.getElementById("reject").submit();
             });
             $(document).on('click', '.btn-update', function(e) {
