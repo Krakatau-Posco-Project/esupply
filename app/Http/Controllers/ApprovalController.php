@@ -97,6 +97,8 @@ class ApprovalController extends Controller
                     Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'On Progress']);
                 }
             }
+        } else if ($request->process == 'Approved') {
+            Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
         }
         return to_route('approval.tluser')->with('success', 'Successfully processed');
     }
