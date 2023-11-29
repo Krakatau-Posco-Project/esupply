@@ -53,8 +53,8 @@ Route::post('/updatedetailtlgam', [ApprovalController::class, 'getdetailtlgam'])
 
 Route::get('/approval/tluser', [ApprovalController::class, 'tluser'])->name('approval.tluser')->middleware('tluser');
 Route::get('/approval/tlgam', [ApprovalController::class, 'tlgam'])->name('approval.tlgam')->middleware('tlgam');
-Route::get('/approval/pic', [ApprovalController::class, 'pic'])->name('approval.pic')->middleware('pic');
-Route::post('/approval/pic', [ApprovalController::class, 'approvepic'])->name('approval.approvepic')->middleware('pic');
+Route::get('/approval/pic', [ApprovalController::class, 'pic'])->name('approval.pic')->middleware('auth');
+Route::post('/approval/pic', [ApprovalController::class, 'approvepic'])->name('approval.approvepic')->middleware('auth');
 Route::post('/approval/tluser', [ApprovalController::class, 'approvetluser'])->name('approval.approvetluser')->middleware('tluser');
 Route::post('/approval/tlgam', [ApprovalController::class, 'approvetlgam'])->name('approval.approvetlgam')->middleware('tlgam');
 Route::post('/approval/savedata/tlgam', [ApprovalController::class, 'savedatatlgam'])->name('approval.savedatatlgam')->middleware('tlgam');

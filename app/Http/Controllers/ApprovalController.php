@@ -77,10 +77,11 @@ class ApprovalController extends Controller
                     Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'On Progress']);
                 }
             }
-        } else if ($request->process == 'Approved') {
-            return "aa";
-            // Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
         }
+        // else if ($request->process == 'Approved') {
+        //     return "aa";
+        //     // Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
+        // }
         return to_route('approval.pic')->with('success', 'Successfully processed');
     }
     public function approvetluser(Request $request)
