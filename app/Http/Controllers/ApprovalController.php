@@ -78,7 +78,8 @@ class ApprovalController extends Controller
                 }
             }
         } else if ($request->process == 'Approved') {
-            Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
+            return "aa";
+            // Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
         }
         return to_route('approval.pic')->with('success', 'Successfully processed');
     }
