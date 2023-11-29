@@ -42,20 +42,24 @@ class ApprovalController extends Controller
     public function approvepic(Request $request)
     {
 
-        $detailvalue = $request->hiddenvalue;
-        $arrayvalue = explode(",", $detailvalue);
-        return $request;
-        foreach ($arrayvalue as $value) {
-            $separate = explode("|", $value);
-            $transactiondetail = TransactionDetail::firstWhere('id', $separate[0]);
-            $items = Items::firstWhere('id', $transactiondetail->items_id);
-            // echo $items->id . "<br>";
-            TransactionDetail::firstWhere('id', $separate[0])->update([
-                'pic_qty' => $separate[1],
-                'transaction_total_price' => $separate[1] * $items->price
-            ]);
-            Items::firstWhere('id', $transactiondetail->items_id)->update(['item_stock' => $items->item_stock - $separate[1]]);
+
+        // return $request;
+        if ($request->hiddenvalue) {
+            $detailvalue = $request->hiddenvalue;
+            $arrayvalue = explode(",", $detailvalue);
+            foreach ($arrayvalue as $value) {
+                $separate = explode("|", $value);
+                $transactiondetail = TransactionDetail::firstWhere('id', $separate[0]);
+                $items = Items::firstWhere('id', $transactiondetail->items_id);
+                // echo $items->id . "<br>";
+                TransactionDetail::firstWhere('id', $separate[0])->update([
+                    'pic_qty' => $separate[1],
+                    'transaction_total_price' => $separate[1] * $items->price
+                ]);
+                Items::firstWhere('id', $transactiondetail->items_id)->update(['item_stock' => $items->item_stock - $separate[1]]);
+            }
         }
+
         // return "";
         $transaction = Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej));
         $newnotification = new Notification([
