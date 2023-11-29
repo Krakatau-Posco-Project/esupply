@@ -44,7 +44,7 @@ class ApprovalController extends Controller
 
         $detailvalue = $request->hiddenvalue;
         $arrayvalue = explode(",", $detailvalue);
-        return $hiddenvalue;
+        return $request;
         foreach ($arrayvalue as $value) {
             $separate = explode("|", $value);
             $transactiondetail = TransactionDetail::firstWhere('id', $separate[0]);
