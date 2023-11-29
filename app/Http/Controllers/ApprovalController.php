@@ -77,11 +77,12 @@ class ApprovalController extends Controller
                     Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'On Progress']);
                 }
             }
+        } else if ($request->process == 'Rejected') {
+            Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => $request->process]);
+            if ($transaction->purchase_type == 'Purchase Request Proposal') {
+                // Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['tl_approval' => $request->process, 'tlgam_approval' => $request->process]);
+            }
         }
-        // else if ($request->process == 'Approved') {
-        //     return "aa";
-        //     // Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
-        // }
         return to_route('approval.pic')->with('success', 'Successfully processed');
     }
     public function approvetluser(Request $request)
@@ -92,8 +93,6 @@ class ApprovalController extends Controller
         foreach ($arrayvalue as $value) {
             $separate = explode("|", $value);
             TransactionDetail::firstWhere('id', $separate[0])->update(['tluser_qty' => $separate[1]]);
-            // echo "$separate[0] <br>";
-            // echo "$separate[1] <br>";
         }
         Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update([
             'tl_approval' => $request->process,
@@ -106,7 +105,7 @@ class ApprovalController extends Controller
                     Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'On Progress']);
                 }
             }
-        } else if ($request->process == 'Approved') {
+        } else if ($request->process == 'Rejected') {
             Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
         }
         return to_route('approval.tluser')->with('success', 'Successfully processed');
