@@ -41,9 +41,10 @@ class ApprovalController extends Controller
 
     public function approvepic(Request $request)
     {
-        // return $request;
+
         $detailvalue = $request->hiddenvalue;
         $arrayvalue = explode(",", $detailvalue);
+        return $arrayvalue;
         foreach ($arrayvalue as $value) {
             $separate = explode("|", $value);
             $transactiondetail = TransactionDetail::firstWhere('id', $separate[0]);
