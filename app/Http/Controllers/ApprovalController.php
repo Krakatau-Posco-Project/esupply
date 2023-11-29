@@ -41,7 +41,7 @@ class ApprovalController extends Controller
 
     public function approvepic(Request $request)
     {
-        return $request;
+        // return $request;
         $detailvalue = $request->hiddenvalue;
         $arrayvalue = explode(",", $detailvalue);
         foreach ($arrayvalue as $value) {
@@ -72,6 +72,8 @@ class ApprovalController extends Controller
                     Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'On Progress']);
                 }
             }
+        } else if ($request->process == 'Approved') {
+            Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['status' => 'Rejected']);
         }
         return to_route('approval.pic')->with('success', 'Successfully processed');
     }
