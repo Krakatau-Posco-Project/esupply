@@ -41,7 +41,7 @@ class ApprovalController extends Controller
 
     public function approvepic(Request $request)
     {
-        // return $request;
+        return $request;
         $detailvalue = $request->hiddenvalue;
         $arrayvalue = explode(",", $detailvalue);
         foreach ($arrayvalue as $value) {
