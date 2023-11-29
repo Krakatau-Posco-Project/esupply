@@ -69,6 +69,7 @@ class ApprovalController extends Controller
             'notif_type' => $request->process,
             'approver_name' => $transaction->pic_approver_name
         ]);
+
         $newnotification->save();
         Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['pic_approval' => $request->process]);
         if ($request->process == 'Approved') {
