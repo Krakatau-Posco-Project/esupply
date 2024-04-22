@@ -148,7 +148,7 @@ class PurchaseController extends Controller
             'orgunit' =>  auth()->user()->orgunit,
             'status' =>  $status,
             'purchase_type' =>  $purchase_type,
-            // 'purpose' =>  $request->purpose,
+            'purpose' =>  $request->purpose,
             'reason' =>  $request->reason,
             'transno' =>  $lasttransno,
             'tl_approval' =>  $tl_approval,
