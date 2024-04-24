@@ -67,6 +67,7 @@ Route::post('/admin/additem', [AdministrationController::class, 'additem'])->nam
 Route::post('/admin/item', [AdministrationController::class, 'saveitem'])->name('admin.saveitem')->middleware('auth');
 Route::get('/admin/item/{id}', [AdministrationController::class, 'show'])->name('admin.itemshow')->middleware('auth');
 Route::get('/admin/direct', [AdministrationController::class, 'admindirect'])->name('admin.direct')->middleware('auth');
+Route::get('/admin/direct/export', [AdministrationController::class, 'export'])->name('admin.direct.export')->middleware('auth');
 Route::get('/admin/pr', [AdministrationController::class, 'adminpr'])->name('admin.pr')->middleware('auth');
 Route::get('/admin/masteritem', [AdministrationController::class, 'masteritem'])->name('admin.masteritem')->middleware('auth');
 Route::post('/admin/pr', [AdministrationController::class, 'postreceipt'])->name('admin.postreceipt')->middleware('auth');

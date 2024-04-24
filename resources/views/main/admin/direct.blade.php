@@ -29,7 +29,7 @@
                     <h3 class="card-title">Search Patient</h3>
                 </div> --}}
                 {{-- <div class="card-body">
-                    
+
                 </div> --}}
                 <!-- /.card-header -->
                 {{-- {{ $listemployee }} --}}
@@ -41,8 +41,10 @@
                     </div>
                     <br>
                 @endif
+
                 <div class="card-body">
 
+                    <a class="btn btn-info btn-sm float-right btn-export">Export to Excell</a>
 
                     <table id="tb_default" class="table table-bordered table-striped">
                         <thead>
@@ -116,9 +118,76 @@
 
         </div>
     </section>
+
+<!-- Modal export -->
+<div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exportModalLabel">Export Data to Excell</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form id="exportForm" method="get" action="{{ route('admin.direct.export') }}">
+
+            @csrf
+            @method('GET')
+            {{-- modal body --}}
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                            <label>From Date</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input required type="text" name="from_date" id="from_date" class="format_tgl form-control datetimepicker-input @error('from_date') is-invalid @enderror" data-target="#from_date" value="{{old('from_date')}}">
+                                <div class="input-group-append" data-target="#from_date" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                @error('from_date')
+                                <div class="error invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>To Date</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input required type="text" name="to_date" id="to_date" class="format_tgl form-control datetimepicker-input @error('to_date') is-invalid @enderror" data-target="#to_date" value="{{old('to_date')}}">
+                                <div class="input-group-append" data-target="#to_date" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                @error('to_date')
+                                <div class="error invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+            {{-- end modal body --}}
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="export_btnsubmit">Export</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal export report-->
+
 @endsection
 @section('script')
     <script>
+        $(document).on('click', '.btn-export', function(e) {
+            e.preventDefault();
+            $('#exportModal').modal('show');
+        });
         $(document).on('click', '.btn-delete', function(e) {
             $.ajax({
                 type: "GET",
@@ -137,6 +206,11 @@
             $('#CartModal').modal('show');
         });
         $(function() {
+            //Date picker
+            $('.format_tgl').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+
             $("#tb_default").DataTable({
                 "responsive": true,
                 "lengthChange": false,

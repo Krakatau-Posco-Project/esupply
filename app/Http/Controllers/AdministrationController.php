@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Items;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Exports\DirectExport;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdministrationController extends Controller
 {
@@ -308,5 +310,19 @@ class AdministrationController extends Controller
 
 
         return to_route('admin.user')->with('success', 'User successfully updated');
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'from_date' => 'required',
+            'to_date' => 'required',
+        ]);
+
+        $from_date=$request->from_date;
+        $to_date = $request->to_date;
+
+        return Excel::download(new DirectExport($from_date,$to_date), 'Recapitulation_Direct_Pick_Up'.$from_date.'_'.$to_date.'.xlsx');
+
     }
 }
