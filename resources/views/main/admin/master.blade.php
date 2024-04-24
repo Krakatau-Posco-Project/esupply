@@ -30,7 +30,7 @@
                     <h3 class="card-title">Search Patient</h3>
                 </div> --}}
                 {{-- <div class="card-body">
-                    
+
                 </div> --}}
                 <!-- /.card-header -->
                 {{-- {{ $listemployee }} --}}
@@ -178,11 +178,38 @@
                                                             <option value="Rim" id="Rim">Rim</option>
                                                             <option value="Ktk" id="Ktk">Ktk</option>
                                                             <option value="Duz" id="Duz">Duz</option>
+                                                            <option value="Box" id="Box">Box</option>
+                                                            <option value="Tube" id="Tube">Tube</option>
                                                         </select>
                                                     </td>
+                                                    <td>Category</td>
+                                                    <td>:</td>
+                                                    <td><select name="classification" id="classification">
+                                                        <option value="" id="">-Pilih-</option>
+                                                        <option value="Battery" id="Battery">Battery</option>
+                                                        <option value="Clip" id="Clip">Clip</option>
+                                                        <option value="Cutting" id="Cutting">Cutting</option>
+                                                        <option value="Document File" id="Document File">Document File</option>
+                                                        <option value="Drinking Water" id="Drinking Water">Drinking Water</option>
+                                                        <option value="Envelope" id="Envelope">Envelope</option>
+                                                        <option value="Office Supply" id="Office Supply">Office Supply</option>
+                                                        <option value="Paper" id="Paper">Paper</option>
+                                                        <option value="Pin" id="Pin">Pin</option>
+                                                        <option value="Post it" id="Post it">Post it</option>
+                                                        <option value="Stapler" id="Stapler">Stapler</option>
+                                                        <option value="Sticker" id="Sticker">Sticker</option>
+                                                        <option value="Tape" id="Tape">Tape</option>
+                                                        <option value="Toner" id="Toner">Toner</option>
+                                                        <option value="Water" id="Water">Water</option>
+                                                    </select></td>
+                                                </tr>
+                                                <tr>
                                                     <td>Picture</td>
                                                     <td>:</td>
                                                     <td><input type="file" name="picture" id="picture" accept="image/png, image/gif, image/jpeg"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             </table>
 

@@ -84,9 +84,27 @@
                                     <td><input type="text" name="item_stock_reminder" id="item_stock_reminder"></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Category</td>
+                                    <td>:</td>
+                                    <td><select name="classification" id="edit-classification">
+                                        <option value="" id="">-Pilih-</option>
+                                        <option value="Battery" id="Battery">Battery</option>
+                                        <option value="Clip" id="Clip">Clip</option>
+                                        <option value="Cutting" id="Cutting">Cutting</option>
+                                        <option value="Document File" id="Document File">Document File</option>
+                                        <option value="Drinking Water" id="Drinking Water">Drinking Water</option>
+                                        <option value="Envelope" id="Envelope">Envelope</option>
+                                        <option value="Office Supply" id="Office Supply">Office Supply</option>
+                                        <option value="Paper" id="Paper">Paper</option>
+                                        <option value="Pin" id="Pin">Pin</option>
+                                        <option value="Post it" id="Post it">Post it</option>
+                                        <option value="Stapler" id="Stapler">Stapler</option>
+                                        <option value="Sticker" id="Sticker">Sticker</option>
+                                        <option value="Tape" id="Tape">Tape</option>
+                                        <option value="Toner" id="Toner">Toner</option>
+                                        <option value="Water" id="Water">Water</option>
+                                    </select></td>
+
                                     <td>Picture</td>
                                     <td>:</td>
                                     <td><input type="file" name="picture" id="picture" accept="image/png, image/gif, image/jpeg"></td>
@@ -148,6 +166,8 @@
                         document.getElementById("item_stock").innerHTML = response.items.item_stock;
                         document.getElementById("item_unit").value = response.items.item_unit;
                         document.getElementById("price").value = response.items.price;
+                        //document.getElementById("classification").value = response.items.classification;
+                        $('#edit-classification').val(response.items.classification).change();
                         document.getElementById("item_stock_reminder").value = response.items.item_stock_reminder;
                         document.getElementById(response.items.item_unit).selected;
                         // var myloginid = document.getElementById("myloginid").innerHTML;

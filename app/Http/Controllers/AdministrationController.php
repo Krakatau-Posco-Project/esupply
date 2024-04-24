@@ -86,6 +86,7 @@ class AdministrationController extends Controller
                     'item_stock' => $request->add_stock + $request->old_stock,
                     'item_stock_reminder' => $request->item_stock_reminder,
                     'price' => $request->price,
+                    'classification' => $request->classification,
                     'picture' => $file_name
                 ]);
         } else {
@@ -95,6 +96,7 @@ class AdministrationController extends Controller
                     'item_unit' => $request->item_unit,
                     'item_stock' => $request->add_stock + $request->old_stock,
                     'item_stock_reminder' => $request->item_stock_reminder,
+                    'classification' => $request->classification,
                     'price' => $request->price
                 ]);
         }
@@ -120,6 +122,7 @@ class AdministrationController extends Controller
             'item_unit' => $request->item_unit,
             'item_stock' => $request->add_stock,
             'price' => $request->price,
+            'classification' => $request->classification,
             'picture' => $file_name
         ]);
         $newitem->save();
