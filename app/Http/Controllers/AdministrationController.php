@@ -322,7 +322,7 @@ class AdministrationController extends Controller
         $from_date=$request->from_date;
         $to_date = $request->to_date;
 
-        return Excel::download(new DirectExport($from_date,$to_date), 'Recapitulation_Direct_Pick_Up'.$from_date.'_'.$to_date.'.xlsx');
+        return Excel::download(new DirectExport($from_date,$to_date), 'Recapitulation_Direct_Pick_Up_'.$from_date.'_'.$to_date.'.xlsx');
 
     }
 }
