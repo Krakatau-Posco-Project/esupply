@@ -25,13 +25,14 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             // cek ada update atau tidak di database master employee
-            $employee = Http::get(config('api.employee.compact_hash') . auth()->user()->ssohash . '')->object();
+            $employee = Http::get(config('api.employee.base_url_hash') . auth()->user()->ssohash . '')->object();
             $userdetil = User::find(auth()->user()->id);
-            if(($userdetil->id_org_unit != $employee->id_org_unit) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
+            if(($userdetil->id_org_unit != $employee->id_ou) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
                 $userdetil->username = $employee->id_emp;
-                $userdetil->id_org_unit = $employee->id_org_unit;
+                $userdetil->id_org_unit = $employee->id_ou;
                 $userdetil->id_job_position = $employee->id_job_position;
                 $userdetil->orgunit = $employee->team;
+                $userdetil->id_user_me_approver = $employee->appr1;
                 $userdetil->save();
             }
 
@@ -57,13 +58,14 @@ class LoginController extends Controller
             if (Auth::loginUsingId($userget->id)) {
 
                  // cek ada update atau tidak di database master employee
-                $employee = Http::get(config('api.employee.compact_hash') . auth()->user()->ssohash . '')->object();
+                $employee = Http::get(config('api.employee.base_url_hash') . auth()->user()->ssohash . '')->object();
                 $userdetil = User::find(auth()->user()->id);
-                if(($userdetil->id_org_unit != $employee->id_org_unit) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
+                if(($userdetil->id_org_unit != $employee->id_ou) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
                     $userdetil->username = $employee->id_emp;
-                    $userdetil->id_org_unit = $employee->id_org_unit;
+                    $userdetil->id_org_unit = $employee->id_ou;
                     $userdetil->id_job_position = $employee->id_job_position;
                     $userdetil->orgunit = $employee->team;
+                    $userdetil->id_user_me_approver = $employee->appr1;
                     $userdetil->save();
                 }
 
