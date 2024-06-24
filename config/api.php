@@ -22,5 +22,6 @@ return [
         'base_url_hash' => 'http://172.21.23.73/employee-api/public/api/employeesbyhash/',
         'id_url' => 'http://172.21.23.73/employee-api/public/api/employeesById/',
         'compact' => 'http://172.21.23.73/employee-api/public/api/employeesByIdCompact/',
+        'compact_hash' => 'http://172.21.23.73/employee-api/public/api/employeeCompactByHash/',
     ],
 ];

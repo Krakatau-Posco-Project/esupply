@@ -23,6 +23,18 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
         if (Auth::attempt($credentials)) {
+
+            // cek ada update atau tidak di database master employee
+            $employee = Http::get(config('api.employee.compact_hash') . auth()->user()->ssohash . '')->object();
+            $userdetil = User::find(auth()->user()->id);
+            if(($userdetil->id_org_unit != $employee->id_org_unit) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
+                $userdetil->username = $employee->id_emp;
+                $userdetil->id_org_unit = $employee->id_org_unit;
+                $userdetil->id_job_position = $employee->id_job_position;
+                $userdetil->orgunit = $employee->team;
+                $userdetil->save();
+            }
+
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
@@ -43,6 +55,18 @@ class LoginController extends Controller
         $userget = User::firstWhere('ssohash', $getid[1]);
         if ($userget) {
             if (Auth::loginUsingId($userget->id)) {
+
+                 // cek ada update atau tidak di database master employee
+                $employee = Http::get(config('api.employee.compact_hash') . auth()->user()->ssohash . '')->object();
+                $userdetil = User::find(auth()->user()->id);
+                if(($userdetil->id_org_unit != $employee->id_org_unit) or ($userdetil->id_job_position != $employee->id_job_position) or ($userdetil->username != $employee->id_emp)){
+                    $userdetil->username = $employee->id_emp;
+                    $userdetil->id_org_unit = $employee->id_org_unit;
+                    $userdetil->id_job_position = $employee->id_job_position;
+                    $userdetil->orgunit = $employee->team;
+                    $userdetil->save();
+                }
+
                 return redirect()->intended('/');
             } else {
                 return back()->with('loginError', 'SSO failed, user not found');
