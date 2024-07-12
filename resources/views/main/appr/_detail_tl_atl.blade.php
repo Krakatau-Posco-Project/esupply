@@ -1,8 +1,6 @@
 <div class="modal fade" id="detailModal" role="dialog" aria-labelledby="detailTransaction" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            {{-- <form action="" method="POST"> --}}
-            {{-- @csrf --}}
             <div class="modal-header">
                 <h5 class="modal-title" id="detailTransactionLabel"><span id="purchase_type"></span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -119,10 +117,9 @@
                         <input type="hidden" name="process" id="process" value="Rejected">
                         <input type="hidden" name="hiddennote" id="hiddennotereject">
                         <button type="button" class="btn btn-danger btn-sm" id="b-reject">Reject</button>
-                        {{-- <input type="submit" class="btn btn-danger btn-sm" value="Reject" id="b-reject"> --}}
                     </form>
                 </div>
-                {{-- </form> --}}
+
             </div>
         </div>
     </div>
@@ -203,7 +200,6 @@
                                 .getElementsByTagName(
                                     'thead')[0];
 
-
                             var datetransaction = document.getElementById("datetransaction");
 
                             document.getElementById("transactionidappr").value = response.transaction
@@ -233,7 +229,6 @@
                                 .reason;
 
                             var inputnote = document.createElement("INPUT");
-                            // inputnote = document.createElement("INPUT");
                             inputnote.setAttribute("type", "text");
                             inputnote.setAttribute("name", "inputnote");
                             inputnote.setAttribute("style", "width: 250px;");
@@ -297,9 +292,6 @@
                                 cell4.innerHTML = response.transaction.detail[i].qty;
                                 // cell5.innerHTML = response.transaction.detail[i].qty;
                                 cell6.innerHTML = response.transaction.detail[i].pic_qty; //tl adjustment
-                                // cell7.innerHTML = response.transaction.detail[i]
-                                //     .tlgam_qty; //gam tl adjustment
-                                // var hidden = document.createElement("INPUT");
                                 var x = document.createElement("INPUT");
                                 var iddetail = response.transaction.detail[i].id;
                                 var newcolid = "col" + i;
@@ -312,11 +304,8 @@
                                 x.setAttribute("value", response.transaction.detail[i].tluser_qty);
                                 cell5.appendChild(x);
 
+                                var urlupdate = '{{ route('approval.approve_tl_atl') }}';
 
-                                var urlupdate = '{{ route('update.detailtluser') }}';
-                                // urlupdate = urlupdate.replace(':iddetail', iddetail);
-                                // urlupdate = urlupdate.replace(':newval', document.getElementById(newcolid)
-                                //     .value);
                                 var button = document.createElement("a");
                                 if (response.transaction.tl_approval == "Pending") {
                                     button.setAttribute("style", "width: 50px;");
@@ -324,12 +313,10 @@
                                     button.setAttribute("style", "display: none;");
                                 }
                                 button.setAttribute("class", "btn btn-success btn-sm btn-update");
-                                // button.setAttribute("data-newval", document.getElementById(newcolid).value);
                                 button.setAttribute("data-url", urlupdate);
                                 button.setAttribute("data-formname", "form" + i);
                                 button.setAttribute("data-iddetail", response.transaction.detail[i].id);
                                 button.innerHTML = "<i class=\"fas fa-rotate\"></i>";
-                                // cell8.appendChild(button);
                                 arrayiddetail[i] = "col" + iddetail;
 
                             }

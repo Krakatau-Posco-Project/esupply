@@ -47,7 +47,6 @@
                                     Approver
                                     <address>
                                         <strong><span id="tl_approver_name">-</span></strong><br>
-                                        <strong><span id="pic_approver_name">-</span></strong><br>
                                         <strong><span id="tlgam_approver_name">-</span></strong><br>
 
                                     </address>
@@ -75,8 +74,7 @@
                                                 <th>Unit</th>
                                                 <th style="text-align: center">Qty</th>
                                                 <th style="text-align: center">TL Adjustment</th>
-                                                <th style="text-align: center">GAM PIC Adjustment</th>
-                                                <th style="text-align: center">GAM TL Adjustment</th>
+                                                <th style="text-align: center">GAM Adjustment</th>
                                                 <th style="text-align: center">Price per-unit</th>
                                                 <th style="text-align: center">Total Price</th>
                                                 {{-- <th style="text-align: center">Vendor</th> --}}
@@ -315,10 +313,10 @@
                             document.getElementById("tl_approver_name").innerHTML = response.transaction
                                 .tl_approver_name + ' (' + response.transaction
                                 .tl_approval + ')';
-                            document.getElementById("pic_approver_name").innerHTML = response
-                                .transaction
-                                .pic_approver_name + ' (' + response.transaction
-                                .pic_approval + ')';
+                            // document.getElementById("pic_approver_name").innerHTML = response
+                            //     .transaction
+                            //     .pic_approver_name + ' (' + response.transaction
+                            //     .pic_approval + ')';
                             document.getElementById("tlgam_approver_name").innerHTML = response
                                 .transaction
                                 .tlgam_approver_name + ' (' + response.transaction
@@ -381,23 +379,23 @@
                                 }
                                 cell4.setAttribute("style", "text-align: center;");
                                 cell5.setAttribute("style", "text-align: center;");
+                                //cell6.setAttribute("style", "text-align: center;");
                                 cell6.setAttribute("style", "text-align: center;");
                                 cell7.setAttribute("style", "text-align: center;");
-                                cell8.setAttribute("style", "text-align: center;");
 
                                 cell1.innerHTML = response.transaction.detail[i].items[0].item_code;
                                 cell2.innerHTML = response.transaction.detail[i].items[0].item_name;
                                 cell3.innerHTML = response.transaction.detail[i].items[0].item_unit;
                                 cell4.innerHTML = response.transaction.detail[i].qty;
-                                cell6.innerHTML = response.transaction.detail[i].pic_qty;
+                                //cell6.innerHTML = response.transaction.detail[i].pic_qty;
                                 cell5.innerHTML = response.transaction.detail[i]
                                     .tluser_qty;
 
-                                cell8.innerHTML = idrFormat.format(response.transaction.detail[i]
+                                cell7.innerHTML = idrFormat.format(response.transaction.detail[i]
                                     .transaction_price);
                                 var totalprice = response.transaction.detail[i].transaction_price * response
                                     .transaction.detail[i].tlgam_qty;
-                                cell9.innerHTML = idrFormat.format(totalprice);
+                                cell8.innerHTML = idrFormat.format(totalprice);
                                 // cell10.innerHTML = response.transaction.detail[i].items[0].vendor;
                                 // var hidden = document.createElement("INPUT");
                                 sumprice += totalprice;
@@ -413,7 +411,7 @@
                                 x.setAttribute("required", "required");
                                 x.setAttribute("id", "col" + iddetail);
                                 x.setAttribute("value", response.transaction.detail[i].tlgam_qty);
-                                cell7.appendChild(x);
+                                cell6.appendChild(x);
 
 
                                 var urlupdate = '{{ route('update.detailtlgam') }}';

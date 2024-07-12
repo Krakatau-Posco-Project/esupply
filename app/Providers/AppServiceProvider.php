@@ -26,17 +26,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // view()->composer('welcome', function ($view) {
-        //     $view->with('setting', Setting::select('name', 'title', 'logo')->firstWhere('id', 1));
+        // view()->composer(['layouts.master'], function ($view) {
+        //     $view->with('notifpicapproverequest', Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('pic_approval', 'Pending')->count())
+        //         ->with('notifpicapprovedirect', Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Direct Pick Up')->where('pic_approval', 'Pending')->count())
+        //         ->with('notiftluserapproverequest', Transaction::where('tl_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Pending')->count())
+        //         ->with('notiftlgamapproverequest', Transaction::where('tlgam_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tlgam_approval', 'Pending')->count());
         // });
+
         view()->composer(['layouts.master'], function ($view) {
-            $view->with('notifpicapproverequest', Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('pic_approval', 'Pending')->count())
-                ->with('notifpicapprovedirect', Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Direct Pick Up')->where('pic_approval', 'Pending')->count())
-                ->with('notiftluserapproverequest', Transaction::where('tl_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Pending')->count())
-                ->with('notiftlgamapproverequest', Transaction::where('tlgam_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tlgam_approval', 'Pending')->count());
+            $view->with('transaction', Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->get())
+                ->with('pr_trans', Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->whereHas('user', function ($query){
+                    $query->where('id_org_unit', auth()->user()->id_org_unit);
+                })->where('purchase_type', 'Purchase Request Proposal')->get());
         });
-        // $notiftluserapproverequest = Transaction::where('tl_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Pending')->count();
-        // $notiftlgamapproverequest = Transaction::where('tlgam_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tlgam_approval', 'Pending')->count();
+
 
         Gate::Define('admin', function (User $user) { //use on 'can'/'canany' blade
             return $user->priv === 'admin';
@@ -50,10 +53,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::Define('tlgam', function (User $user) {
             return $user->priv === 'tlgam';
         });
-        // Gate::define('direct', function ($user = null) {
-        //     // $allowed_addresses = json_decode(env('REMOTE_ADDRESSES'));
-        //     $allowed_addresses[] = ['172.21.25.205'];
-        //     return in_array(request()->ip(), $allowed_addresses);
-        // });
+
     }
 }

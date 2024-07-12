@@ -26,11 +26,6 @@
 
                 <div class="row">
                     <div class="col-12">
-                        {{-- <div class="callout callout-info">
-                                <h5><i class="fas fa-info"></i> Note:</h5>
-                                This page has been enhanced for printing. Click the print button at the bottom of the
-                                invoice to test.
-                            </div> --}}
 
 
                         <!-- Main content -->
@@ -68,10 +63,7 @@
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <b>Transaction #<span id="transactionnumber"></span></b><br>
-                                    {{-- <br>
-                                        <b>Order ID:</b> 4F3S8J<br>
-                                        <b>Payment Due:</b> 2/22/2014<br>
-                                        <b>Account:</b> 968-34567 --}}
+
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -130,18 +122,7 @@
 
                                     <div class="table-responsive">
                                         <table class="table">
-                                            {{-- <tr>
-                                                <th style="width:50%">Subtotal:</th>
-                                                <td><span id="subtotal"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tax (10%)</th>
-                                                <td><span id="tax"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Shipping:</th>
-                                                <td><span id="shipping"></span></td>
-                                            </tr> --}}
+
                                             <tr>
                                                 <th>Total Items:</th>
                                                 <td><span id="totalitems"></span></td>
@@ -169,52 +150,13 @@
                             </div>
                             <!-- /.row -->
 
-                            <!-- this row will not appear when printing -->
-                            {{-- <div class="row no-print">
-                                    <div class="col-12">
-                                        <a href="invoice-print.html" rel="noopener" target="_blank"
-                                            class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                        <button type="button" class="btn btn-success float-right"><i
-                                                class="far fa-credit-card"></i> Submit
-                                            Payment
-                                        </button>
-                                        <button type="button" class="btn btn-primary float-right"
-                                            style="margin-right: 5px;">
-                                            <i class="fas fa-download"></i> Generate PDF
-                                        </button>
-                                    </div>
-                                </div>
-                            </div> --}}
+
                             <!-- /.invoice -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
                 <div class="modal-footer">
-                    {{-- <form name="savedata" method="POST" id="savedata" action="{{ route('approval.savedatatlgam') }}">
-                        @csrf
-                        <input type="hidden" name="transactionidsave" id="transactionidsave">
-                        <input type="hidden" name="process" id="process" value="Approved">
-                        <input type="hidden" name="hiddennote" id="hiddennotesavedata">
-                        <input type="hidden" name="hiddenarray" id="hiddenarraysavedata">
-                        <input type="hidden" name="hiddenvalue" id="hiddenvaluesavedata">
-                        <button type="button" class="btn btn-success btn-sm" id="b-savedata">Save Data</button>
-                    </form>
-                    <form name="approve" method="POST" id="approve">
-                        @csrf
-                        <input type="hidden" name="transactionidappr" id="transactionidappr">
-                        <input type="hidden" name="process" id="process" value="Approved">
-                        <input type="hidden" name="hiddennote" id="hiddennoteapprove">
-                        <input type="hidden" name="hiddenarray" id="hiddenarrayapprove">
-                        <input type="hidden" name="hiddenvalue" id="hiddenvalueapprove">
-                        <button type="button" class="btn btn-info btn-sm" id="b-approve">Approve</button>
-                    </form>
-                    <form name="reject" method="POST" id="reject">
-                        @csrf
-                        <input type="hidden" name="transactionidrej" id="transactionidrej">
-                        <input type="hidden" name="process" id="process" value="Rejected">
-                        <input type="hidden" name="hiddennote" id="hiddennotereject">
-                        <button type="button" class="btn btn-danger btn-sm" id="b-reject">Reject</button>
-                    </form> --}}
+
                 </div>
                 {{-- </form> --}}
             </div>
@@ -425,14 +367,7 @@
                                 // var x = document.createElement("INPUT");
                                 var iddetail = response.transaction.detail[i].id;
                                 var newcolid = "col" + i;
-                                // x.setAttribute("type", "number");
-                                // x.setAttribute("name", "col" + iddetail);
-                                // x.setAttribute("style", "width: 50px;");
-                                // x.setAttribute("min", "1");
-                                // x.setAttribute("required", "required");
-                                // x.setAttribute("id", "col" + iddetail);
-                                // x.setAttribute("value", response.transaction.detail[i].tlgam_qty);
-                                // cell7.appendChild(x);
+
                                 cell7.innerHTML = response.transaction.detail[i].tlgam_qty;;
 
 
@@ -452,17 +387,13 @@
                                 arrayiddetail[i] = "col" + iddetail;
 
                             }
-                            // document.getElementById("hiddenarrayapprove").value = arrayiddetail;
-                            // document.getElementById("hiddenarraysavedata").value = arrayiddetail;
+
 
                             document.getElementById("idtransaction").value = response.transaction.id;
                             document.getElementById("receipt").value = response.transaction.receipt;
                             document.getElementById("totalitems").innerHTML = totalitems;
                             // document.getElementById("total").innerHTML = sumprice;
                             document.getElementById("total").innerHTML = idrFormat.format(sumprice);
-
-
-
 
                             $(".overlay").addClass('d-none');
                         }

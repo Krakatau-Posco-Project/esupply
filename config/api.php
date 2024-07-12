@@ -24,4 +24,5 @@ return [
         'compact' => 'http://172.21.23.73/employee-api/public/api/employeesByIdCompact/',
         'compact_hash' => 'http://172.21.23.73/employee-api/public/api/employeeCompactByHash/',
     ],
+    'token' => '3|BwO6VpAq0Mv9WuZsRX0Ff6VaXxV5zwqI70vwhQZB'
 ];

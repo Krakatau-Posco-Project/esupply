@@ -24,15 +24,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-                {{-- @include('partials.content-script') --}}
-                {{-- <div class="card-header">
-                    <h3 class="card-title">Search Patient</h3>
-                </div> --}}
-                {{-- <div class="card-body">
 
-                </div> --}}
-                <!-- /.card-header -->
-                {{-- {{ $listemployee }} --}}
                 @if (session()->has('success'))
                     <br>
                     <div class="alert alert-success alert-dismissible" style="width:80%; margin:auto;">
@@ -53,11 +45,9 @@
                                 <th>Org Unit</th>
                                 <th>Purchase Type</th>
                                 <th>No Transaction</th>
-                                <th>Date</th>
-                                <th>TL/ATL Approval status</th>
-                                {{-- <th>PIC Approval status</th> --}}
+                                <th>TL Approval status</th>
                                 <th>TL GAM Approval status</th>
-
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,19 +58,17 @@
                                     <td>{{ $transaction->name }}</td>
                                     <td>{{ $transaction->orgunit }}</td>
                                     <td>{{ $transaction->purchase_type }}</td>
-                                    <td><a href="#" class="btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a>
+                                    <td><a href="#" class="btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" uid="row{{ $transaction->id }}"> {{ $transaction->transactionnumber }}</a></td>
+                                    <td>{{ $transaction->tl_approval }}</td>
+                                    <td>{{ $transaction->tlgam_approval }}
+                                        @if ($transaction->tlgam_approval == 'Pending')
+                                            {{-- <span class="badge badge-danger right">!</span> --}}
+                                            &nbsp;<span class="fa-solid fa-circle-exclamation text-danger"></span>
+                                        @else
+                                        @endif
                                     </td>
-                                    <td style="text-align: center">{{ $transaction->created_at }}</td>
-                                    <td style="text-align: center;">
-                                        {{ $transaction->tl_approver_name }}<br><span @if ($transaction->tl_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tl_approval }}</span>
-                                    </td>
-                                    {{-- <td style="text-align: center">
-                                        {{ $transaction->pic_approver_name }}<br><span @if ($transaction->pic_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->pic_approval }}</span>
-                                    </td> --}}
-                                    <td style="text-align: center">
-                                        {{ $transaction->tlgam_approver_name }}<br><span @if ($transaction->tlgam_approval == 'Pending') style="color: red;" @else style="color: blue;" @endif>{{ $transaction->tlgam_approval }}</span>
-                                    </td>
-
+                                    <td><button title="Approve" type="button" class="btn btn-info btn-sm btn-detail" data-url="{{ route('transaction.detail', $transaction->id) }}" {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
+                                            <i class="fas fa-stamp"></i></button></td>
                                 </tr>
                             @endforeach
 
@@ -93,11 +81,9 @@
                                 <th>Org Unit</th>
                                 <th>Purchase Type</th>
                                 <th>No Transaction</th>
-                                <th>Date</th>
-                                <th>TL/ATL Approval status</th>
-                                {{-- <th>PIC Approval status</th> --}}
+                                <th>TL Approval status</th>
                                 <th>TL GAM Approval status</th>
-
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -105,8 +91,7 @@
                 {{-- {{ $cart }} --}}
                 {{-- @include('main.pr._directaddcart') --}}
 
-
-                @include('main.admin._detailpr')
+                @include('main.appr._detail_tl_gam')
 
                 <!-- /.card-body -->
 

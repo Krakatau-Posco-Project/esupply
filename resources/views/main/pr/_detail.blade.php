@@ -48,7 +48,7 @@
                                         <address>
                                             <strong><span id="tl_approver_name">-</span></strong><br>
                                             <strong><span id="pic_approver_name">-</span></strong><br>
-                                            <strong><span id="tlgam_approver_name">-</span></strong><br>
+                                            {{-- <strong><span id="tlgam_approver_name">-</span></strong><br> --}}
 
                                         </address>
                                     </div>
@@ -75,8 +75,8 @@
                                                     <th>Unit</th>
                                                     <th style="text-align: center">Qty</th>
                                                     <th style="text-align: center">TL Adjustment</th>
-                                                    <th style="text-align: center">GAM PIC Adjustment</th>
-                                                    <th style="text-align: center">GAM TL Adjustment</th>
+                                                    <th style="text-align: center">GAM Adjustment</th>
+                                                    {{-- <th style="text-align: center">GAM TL Adjustment</th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -202,9 +202,9 @@
                         document.getElementById("pic_approver_name").innerHTML = response.transaction
                             .pic_approver_name + ' (' + response.transaction
                             .pic_approval + ')';
-                        document.getElementById("tlgam_approver_name").innerHTML = response.transaction
-                            .tlgam_approver_name + ' (' + response.transaction
-                            .tlgam_approval + ')';
+                        // document.getElementById("tlgam_approver_name").innerHTML = response.transaction
+                        //     .tlgam_approver_name + ' (' + response.transaction
+                        //     .tlgam_approval + ')';
                         document.getElementById("purpose").innerHTML = response.transaction
                             .purpose;
                         document.getElementById("reason").innerHTML = response.transaction
@@ -247,7 +247,7 @@
                             cell4.innerHTML = response.transaction.detail[i].qty;
                             cell5.innerHTML = response.transaction.detail[i].tluser_qty;
                             cell6.innerHTML = response.transaction.detail[i].pic_qty;
-                            cell7.innerHTML = response.transaction.detail[i].tlgam_qty;
+                            //cell7.innerHTML = response.transaction.detail[i].tlgam_qty;
                         }
 
 
