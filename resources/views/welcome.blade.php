@@ -110,9 +110,9 @@
                                     <div class="inner">
                                         {{-- <h3>{{ $patient }}</h3> --}}
                                         <h4>PIC Approval
-                                            @if ($picreq + $picdir == 0)
+                                            @if ($picdir == 0)
                                             @else
-                                                <span class="badge badge-danger right">{{ $picreq + $picdir }}</span>
+                                                <span class="badge badge-danger right">{{ $picdir }}</span>
                                             @endif
                                         </h4><br>
                                     </div>
@@ -142,7 +142,7 @@
                                         {{-- <i class="ion ion-person-add"></i> --}}
                                         <i class="nav-icon fas fa-user-group"></i>
                                     </div>
-                                    <a href="{{ route('approval.tluser') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="{{ route('approval.pending') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         @endcanany
@@ -164,7 +164,7 @@
                                         {{-- <i class="ion ion-person-add"></i> --}}
                                         <i class="nav-icon fas fa-user-group"></i>
                                     </div>
-                                    <a href="{{ route('approval.tlgam') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="{{ route('approval.pending_ga') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         @endcanany
