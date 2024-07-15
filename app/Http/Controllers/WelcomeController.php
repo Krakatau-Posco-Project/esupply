@@ -14,13 +14,11 @@ class WelcomeController extends Controller
         // $notifpicapproverequest = Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('pic_approval', 'Pending')->count();
         // $notifpicapproverdirect = Transaction::where('pic_approver', auth()->user()->id_user_me)->where('purchase_type', 'Direct Pick Up')->where('pic_approval', 'Pending')->count();
 
-
         // $notiftluserapproverequest = Transaction::where('tl_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Pending')->count();
         // $notiftlgamapproverequest = Transaction::where('tlgam_approver', auth()->user()->id_user_me)->where('purchase_type', 'Purchase Request Proposal')->where('tlgam_approval', 'Pending')->count();
 
 
         $notifpicapproverdirect = Transaction::where('purchase_type', 'Direct Pick Up')->where('pic_approval', 'Pending')->count();
-
         $notiftluserapproverequest = Transaction::where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Pending')->whereHas('user', function ($query){
             $query->where('id_org_unit', auth()->user()->id_org_unit);
         })->count();
@@ -32,7 +30,6 @@ class WelcomeController extends Controller
         return view('welcome', [
             "title" =>  "Main Home",
             "notification" => $notification,
-
             "picdir" => $notifpicapproverdirect,
             "tl" => $notiftluserapproverequest,
             "tlgam" => $notiftlgamapproverequest

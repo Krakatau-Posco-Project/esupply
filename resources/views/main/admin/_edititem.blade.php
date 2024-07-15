@@ -109,20 +109,26 @@
                                     <td>:</td>
                                     <td><input type="file" name="picture" id="picture" accept="image/png, image/gif, image/jpeg"></td>
                                 </tr>
-                                {{-- <tr>
-                                    <td>Stock</td>
+
+                                <tr>
+                                    <td>Active</td>
                                     <td>:</td>
                                     <td>
-                                        <input type="hidden" name="old_stock" id="old_stock">
-                                        <span id="item_stock"></span> + <input type="text" name="add_stock"
-                                            id="add_stock">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="Y">
+                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="N">
+                                            <label class="form-check-label" for="inlineRadio2">No</label>
+                                          </div>
                                     </td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                                <tr>
-                                    <td>Price</td>
-                                    <td>:</td>
-                                    <td><input type="text" name="price" id="price"></td>
-                                </tr> --}}
+
                             </table>
 
 

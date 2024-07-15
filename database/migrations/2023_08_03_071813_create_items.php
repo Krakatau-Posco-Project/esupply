@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('price')->nullable();
             $table->string('vendor')->nullable();
             $table->string('picture')->nullable();
+            $table->string('classification')->nullable();
+            $table->string('active', '2')->nullable();
             $table->timestamps();
         });
     }
