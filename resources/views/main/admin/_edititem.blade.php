@@ -115,12 +115,12 @@
                                     <td>:</td>
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="Y">
-                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                            <input class="form-check-input" type="radio" name="active" id="active_y" value="Y">
+                                            <label class="form-check-label" for="active_y">Yes</label>
                                           </div>
                                           <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="N">
-                                            <label class="form-check-label" for="inlineRadio2">No</label>
+                                            <input class="form-check-input" type="radio" name="active" id="active_n" value="N">
+                                            <label class="form-check-label" for="active_n">No</label>
                                           </div>
                                     </td>
 
@@ -177,6 +177,13 @@
                         document.getElementById("item_stock_reminder").value = response.items.item_stock_reminder;
                         document.getElementById(response.items.item_unit).selected;
                         // var myloginid = document.getElementById("myloginid").innerHTML;
+
+                        let $radios = $('input:radio[name=active]');
+                        $radios.filter('[value='+response.items.active+']').prop('checked', true);
+
+                        if (response.items.active == null){
+                            $radios.prop('checked', false);
+                        }
 
                         $(".overlay").addClass('d-none');
                     }
