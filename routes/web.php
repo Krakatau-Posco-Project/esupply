@@ -85,6 +85,10 @@ Route::post('/admin/user/saveuser', [AdministrationController::class, 'saveuser'
 // Route::post('/admin/user/adduser', [AdministrationController::class, 'useradddb'])->name('admin.storeuser')->middleware('auth');
 Route::post('/admin/user/storeuser', [AdministrationController::class, 'storeuser'])->name('admin.storeuser')->middleware('auth');
 
+Route::get('/admin/picteam', [AdministrationController::class, 'picteam'])->name('admin.picteam')->middleware('auth');
+Route::post('/admin/picteam', [AdministrationController::class, 'storepicteam'])->name('admin.storepicteam')->middleware('auth');
+Route::delete('/admin/picteam/{id}', [AdministrationController::class, 'destroypicteam'])->name('admin.destroypicteam')->middleware('auth');
+
 Route::get('/testapi/{idemp}', [testApi::class, 'aaaa']);
 Route::get('/register', [RegisterController::class, 'register'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'employee'])->name('register.search');

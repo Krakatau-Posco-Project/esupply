@@ -233,6 +233,14 @@
                                 </a>
 
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.picteam') }}" class="nav-link  {{ request()->is('admin/picteam*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>PIC Team</p>
+                                </a>
+
+                            </li>
                         </ul>
                     </li>
                 @endcanany

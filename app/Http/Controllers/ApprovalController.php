@@ -291,7 +291,7 @@ class ApprovalController extends Controller
 
     public function pending_ga()
     {
-        $transaction = Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Approved')->get();
+        $transaction = Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->where('purchase_type', 'Purchase Request Proposal')->where('tl_approval', 'Approved')->where('tlgam_approval', 'Pending')->get();
         return view('main.appr.pending_ga', [
             "title" =>  "Pending GA Approval",
             "transaction" => $transaction

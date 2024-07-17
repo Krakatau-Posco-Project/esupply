@@ -331,4 +331,34 @@ class AdministrationController extends Controller
         return Excel::download(new DirectExport($from_date,$to_date), 'Recapitulation_Direct_Pick_Up_'.$from_date.'_'.$to_date.'.xlsx');
 
     }
+
+    public function picteam(){
+        $picteam = User::select('id', 'username','name', 'orgunit')->where('priv', 'picteam')->get();
+        $user = User::select('id', 'username','name', 'orgunit')->where('priv', 'user')->orderBy('orgunit', 'ASC')->orderBy('name', 'ASC')->get();
+        return view('main.admin.picteam', compact('user', 'picteam'));
+    }
+
+    public function storepicteam(Request $request)
+    {
+        $request->validate([
+            'emp' => 'required'
+        ]);
+
+        $user = User::find($request->emp);
+        $user->priv = 'picteam';
+        $user->update();
+
+        return redirect()->route('admin.picteam')
+                        ->with('success','PIC Team assignment successfully.');
+    }
+
+    public function destroypicteam($id)
+    {
+        $pic = User::findOrFail($id);
+        $pic->priv = 'user';
+        $pic->update();
+
+        return redirect()->route('admin.picteam')
+                        ->with('success','Selected employee hass been deleted from pic list');
+    }
 }
