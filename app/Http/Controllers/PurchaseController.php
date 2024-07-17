@@ -125,7 +125,7 @@ class PurchaseController extends Controller
         } else {
             $purchase_type = 'Purchase Request Proposal';
             $status = "Received";
-            $returnmessage = "Request Submitted";
+            $returnmessage = "Request Submitted. Please inform your TL or ATL for your request approval.";
             $approver = User::firstWhere('id_user_me', auth()->user()->id_user_me_approver);
             $approver_pic = User::firstWhere('id_user_me', 2375);
             $approver_tlgam = User::firstWhere('id_user_me', 955);
@@ -232,6 +232,11 @@ class PurchaseController extends Controller
 
     public function propose()
     {
+        if (auth()->user()->priv != 'picteam')
+        {
+            return abort(403);
+        }
+
         $items = Items::all();
         $cart = Cart::where('id_user', auth()->user()->id_user_me)->firstWhere('cart_type', 'Purchase Request Proposal');
         if ($cart) {

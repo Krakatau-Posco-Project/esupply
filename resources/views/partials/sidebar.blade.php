@@ -106,13 +106,14 @@
                         </li>
                         {{-- @endcan --}}
 
+                        @if (auth()->user()->priv == 'picteam')
                         <li class="nav-item">
                             <a href="{{ route('purchase.propose') }}" class="nav-link {{ request()->is('pr/propose*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Purchase Request Proposal</p>
                             </a>
-
                         </li>
+                        @endif
                     </ul>
                 </li>
                 @canany(['pic', 'tluser', 'tlgam', 'admin'])
