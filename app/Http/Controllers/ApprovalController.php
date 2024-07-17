@@ -72,7 +72,7 @@ class ApprovalController extends Controller
         ]);
 
         $newnotification->save();
-        Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['pic_approval' => $request->process]);
+        Transaction::firstWhere('id', ($request->transactionidappr ?? $request->transactionidrej))->update(['pic_approval' => $request->process, 'pic_approver_name' => auth()->user()->name]);
         if ($request->process == 'Approved') {
             if ($transaction->purchase_type == 'Purchase Request Proposal') {
                 if ($transaction->tl_approval == 'Approved' and $transaction->tlgam_approval == 'Approved') {

@@ -30,7 +30,7 @@ use App\Http\Controllers\UserStockController;
 // });
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('auth');
 Route::get('/stock', [UserStockController::class, 'index'])->name('user.stock')->middleware('auth');
-Route::get('/login', [LoginController::class, 'index'])->name('loginpage');
+Route::get('/login', [LoginController::class, 'index'])->name('loginpage')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authuser');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logoutpage');
 Route::get('/pr/history', [PurchaseController::class, 'history'])->name('purchase.history')->middleware('auth');
@@ -50,7 +50,6 @@ Route::post('/updatedetail', [ApprovalController::class, 'getdetail'])->name('up
 Route::post('/updatedetailtluser', [ApprovalController::class, 'getdetailtluser'])->name('update.detailtluser')->middleware('auth');
 Route::post('/updatedetailtlgam', [ApprovalController::class, 'getdetailtlgam'])->name('update.detailtlgam')->middleware('auth');
 
-
 Route::get('/approval/tluser', [ApprovalController::class, 'tluser'])->name('approval.tluser')->middleware('tluser');
 Route::get('/approval/tlgam', [ApprovalController::class, 'tlgam'])->name('approval.tlgam')->middleware('tlgam');
 Route::get('/approval/pic', [ApprovalController::class, 'pic'])->name('approval.pic')->middleware('auth');
@@ -67,7 +66,6 @@ Route::post('/approval/pending', [ApprovalController::class, 'approve_tl_atl'])-
 Route::get('/approval/pending_ga', [ApprovalController::class, 'pending_ga'])->name('approval.pending_ga')->middleware('auth');
 Route::post('/approval/pending_ga', [ApprovalController::class, 'approve_ga_tl'])->name('approval.approve_ga_tl')->middleware('auth');
 Route::post('/approval/pending_ga/savedata-tlgam', [ApprovalController::class, 'savedata_tlgam'])->name('approval.savedata_tlgam')->middleware('auth');
-
 
 Route::post('/admin/additem', [AdministrationController::class, 'additem'])->name('admin.additem')->middleware('auth');
 Route::post('/admin/item', [AdministrationController::class, 'saveitem'])->name('admin.saveitem')->middleware('auth');
@@ -93,7 +91,6 @@ Route::get('/testapi/{idemp}', [testApi::class, 'aaaa']);
 Route::get('/register', [RegisterController::class, 'register'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'employee'])->name('register.search');
 Route::post('/register/store', [RegisterController::class, 'store'])->name('register.store');
-
 
 Route::get('/notif', [NotificationController::class, 'notification'])->name('test.notif');
 

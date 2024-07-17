@@ -95,6 +95,19 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
+                @if ($count_cart_direct > 0)
+                <div class="modal-body">
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                        Please checkout your Direct Pickup Request before log out.
+                    </div>
+                    {{-- Please checkout your Direct Pickup Request before log out! --}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+                @else
                 <div class="modal-body">Are you sure you want to logout?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -104,6 +117,8 @@
                     </form>
 
                 </div>
+                @endif
+
             </div>
         </div>
     </div>

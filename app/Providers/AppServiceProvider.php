@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Gate;
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('transaction', Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->get())
                 ->with('pr_trans', Transaction::where('created_at', '>', now()->subDays(31)->endOfDay())->whereHas('user', function ($query){
                     $query->where('id_org_unit', auth()->user()->id_org_unit);
-                })->where('purchase_type', 'Purchase Request Proposal')->get());
+                })->where('purchase_type', 'Purchase Request Proposal')->get())->with('count_cart_direct', Cart::where('id_user', auth()->user()->id_user_me)->where('cart_type', 'Direct Pick Up')->count());
         });
 
 
