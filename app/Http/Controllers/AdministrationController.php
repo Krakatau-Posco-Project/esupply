@@ -42,7 +42,7 @@ class AdministrationController extends Controller
     public function masteritem()
     {
         // $transaction = Transaction::where('pic_approval', 'Pending')->get();
-        $items = Items::all();
+        $items = Items::orderByRaw('item_stock < item_stock_reminder DESC')->get();
         return view('main.admin.master', [
             "title" =>  "Item Master Data",
             "items" => $items
