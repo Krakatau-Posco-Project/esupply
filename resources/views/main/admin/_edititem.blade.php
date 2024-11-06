@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>Item Code</td>
                                     <td>:</td>
-                                    <td><input type="text" name="item_code" id="item_code" readonly></td>
+                                    <td><input type="text" name="item_code" id="item_code"></td>
                                     <td>Stock</td>
                                     <td>:</td>
                                     <td>

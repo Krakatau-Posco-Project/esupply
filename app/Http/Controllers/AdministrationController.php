@@ -81,6 +81,7 @@ class AdministrationController extends Controller
             $files->move($destinationPath, $file_name); // move files to destination folder
             Items::where('id', $request->item_id)
                 ->update([
+                    'item_code' => $request->item_code,
                     'item_name' => $request->item_name,
                     'item_unit' => $request->item_unit,
                     'item_stock' => $request->add_stock + $request->old_stock,
@@ -94,6 +95,7 @@ class AdministrationController extends Controller
             Items::where('id', $request->item_id)
                 ->update([
                     'item_name' => $request->item_name,
+                    'item_code' => $request->item_code,
                     'item_unit' => $request->item_unit,
                     'item_stock' => $request->add_stock + $request->old_stock,
                     'item_stock_reminder' => $request->item_stock_reminder,
