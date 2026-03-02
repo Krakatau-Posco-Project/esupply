@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Exports\DirectExport;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdministrationController extends Controller
@@ -39,11 +40,25 @@ class AdministrationController extends Controller
         Transaction::firstWhere('id', $request->idtransaction)->update(['receipt' => $request->receipt]);
         return to_route('admin.pr')->with('success', 'Receipt successfully updated');
     }
-    public function masteritem()
+
+    public function masteritem(Request $request)
     {
-        // $transaction = Transaction::where('pic_approval', 'Pending')->get();
-        $items = Items::orderByRaw('item_stock < item_stock_reminder DESC')->get();
+        $entriesPage = $request->entries ?? 10;
+        $search = $request->search ?? '';
+
+        $baseQueryItems = Items::select();
+
+        if ($search)
+            $baseQueryItems->where(function ($query) use ($search) {
+                $query->where('item_code', 'LIKE', "%$search%")
+                    ->orWhere('item_name', 'LIKE', "%$search%");
+            });
+
+        $items = $baseQueryItems->orderBy('item_name')->paginate($entriesPage);
+
         return view('main.admin.master', [
+            'entriesPage' => $entriesPage,
+            'search' => $search,
             "title" =>  "Item Master Data",
             "items" => $items
         ]);
@@ -69,57 +84,40 @@ class AdministrationController extends Controller
 
     public function saveitem(Request $request)
     {
-        //
+        $item = Items::findOrFail($request->item_id);
+        $item->item_code = $request->item_code;
+        $item->item_name = $request->item_name;
+        $item->item_unit = $request->item_unit;
+        $item->item_stock = $request->add_stock + $request->old_stock;
+        $item->item_stock_reminder = $request->item_stock_reminder;
+        $item->price = $request->price;
+        $item->classification = $request->classification;
+        $item->active = $request->active;
 
-        // return $request;
+        if ($request->file('picture') != '') {
+            // Check existing picture
+            $existingPicture = public_path('storage/item/' . $item->picture);
 
+            if ($existingPicture) {
+                unlink($existingPicture);
+            }
 
-        $destinationPath = 'storage/item/';
-        if ($request->file('picture')) {
-            $files = $request->file('picture'); // will get all files
-            $file_name = $request->item_id . "." . $files->getClientOriginalExtension(); //Get file original name
-            $files->move($destinationPath, $file_name); // move files to destination folder
-            Items::where('id', $request->item_id)
-                ->update([
-                    'item_code' => $request->item_code,
-                    'item_name' => $request->item_name,
-                    'item_unit' => $request->item_unit,
-                    'item_stock' => $request->add_stock + $request->old_stock,
-                    'item_stock_reminder' => $request->item_stock_reminder,
-                    'price' => $request->price,
-                    'classification' => $request->classification,
-                    'active' => $request->active,
-                    'picture' => $file_name
-                ]);
-        } else {
-            Items::where('id', $request->item_id)
-                ->update([
-                    'item_name' => $request->item_name,
-                    'item_code' => $request->item_code,
-                    'item_unit' => $request->item_unit,
-                    'item_stock' => $request->add_stock + $request->old_stock,
-                    'item_stock_reminder' => $request->item_stock_reminder,
-                    'classification' => $request->classification,
-                    'active' => $request->active,
-                    'price' => $request->price
-                ]);
+            // Add new picture
+            $file = $request->picture;
+            $filePath = 'storage/item/';
+            $fileName = Str::slug($request->item_name) . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move($filePath, $fileName);
+
+            $item->picture = $fileName;
         }
 
-
-
-
+        $item->save();
 
         return to_route('admin.masteritem')->with('success', 'Item successfully updated');
     }
+
     public function additem(Request $request)
     {
-        //
-
-        // return $request;
-        $destinationPath = 'storage/item/';
-        $files = $request->file('picture'); // will get all files
-        $file_name = $request->item_id . "." . $files->getClientOriginalExtension(); //Get file original name
-        $files->move($destinationPath, $file_name); // move files to destination folder
         $newitem = new Items([
             'item_code' => $request->item_code,
             'item_name' => $request->item_name,
@@ -128,10 +126,19 @@ class AdministrationController extends Controller
             'price' => $request->price,
             'classification' => $request->classification,
             'active' => 'Y',
-            'picture' => $file_name
         ]);
-        $newitem->save();
 
+        if ($request->file('picture') != '') {
+            $file = $request->picture;
+
+            $filePath = 'storage/item/';
+            $fileName = Str::slug($request->item_name) . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move($filePath, $fileName);
+
+            $newitem->picture = $fileName;
+        }
+
+        $newitem->save();
 
         return to_route('admin.masteritem')->with('success', 'Item successfully saved');
     }

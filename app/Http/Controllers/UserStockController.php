@@ -13,8 +13,7 @@ class UserStockController extends Controller
         $search = $request->search ?? '';
 
         // $transaction = Transaction::where('pic_approval', 'Pending')->get();
-        $baseQueryItems = Items::where('active', '!=', 'N')
-            ->orWhereNull('active');
+        $baseQueryItems = Items::select();
 
         if ($search)
             $baseQueryItems->where(function ($query) use ($search) {
