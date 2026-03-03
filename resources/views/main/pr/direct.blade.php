@@ -1,89 +1,104 @@
 @extends('layouts.master')
+
 @section('content')
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{{ $title }}</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#" class="text-success">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:;" class="text-success">Home</a></li>
                         <li class="breadcrumb-item">Purchase Request</li>
-                        <li class="breadcrumb-item active"><a href="#" class="text-success">{{ $title }}</a>
-                        </li>
+                        <li class="breadcrumb-item active"><a href="#" class="text-success">{{ $title }}</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-                {{-- @include('partials.content-script') --}}
-                {{-- <div class="card-header">
-                    <h3 class="card-title">Search Patient</h3>
-                </div> --}}
-                {{-- <div class="card-body">
-                    
-                </div> --}}
-                <!-- /.card-header -->
-                {{-- {{ $listemployee }} --}}
-                @if (session()->has('success'))
-                    <br>
-                    <div class="alert alert-success alert-dismissible" style="width:80%; margin:auto;">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{ session('success') }}
-                    </div>
-                    <br>
-                @endif
                 <div class="card-body">
 
-                    <button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-cart" id="aaaaaa"
-                        data-url="{{ route('items.showdirectcart', auth()->user()->id_user_me) }}"><i
-                            class="fas fa-cart-shopping"></i>&nbsp;View
-                        cart</button>
-                    <table id="tb_default" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Items</th>
-                                <th>Unit</th>
-                                <th>Stock</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($items as $items)
-                                <tr>
-                                    <td>{{ $items->item_code }}</td>
-                                    <td>{{ $items->item_name }}</td>
-                                    <td>{{ $items->item_unit }}</td>
-                                    <td>{{ $items->item_stock }}</td>
-                                    <td><button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-addcart"
-                                            data-url="{{ route('items.show', $items->id) }}" {{-- data-form-url="{{ route('visit.outpatient_update', $v->slug) }}" --}}>
-                                            <i class="fas fa-cart-shopping"></i></button></td>
-                                </tr>
-                            @endforeach
+                    @if (session()->has('success') || session()->has('danger'))
+                        <div class="alert alert-{{ session('success') ? 'success' : 'danger' }} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ session('success') ? session('success') : session('danger')}}
+                        </div>
+                    @endif
 
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Items</th>
-                                <th>Unit</th>
-                                <th>Stock</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="mb-3">
+                        <button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-cart" id="aaaaaa" data-url="{{ route('items.showdirectcart', auth()->user()->id_user_me) }}">
+                            <i class="fas fa-cart-shopping"></i>&nbsp;View cart
+                        </button>
+                    </div>
+
+                    <form action="" method="get" id="form-search" class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span>Show</span>
+                                <select name="entries" id="entries" class="form-control mx-2">
+                                    <option value="10" {{ $entriesPage == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="25" {{ $entriesPage == 25 ? 'selected' : '' }}>25</option>
+                                    <option value="50" {{ $entriesPage == 50 ? 'selected' : '' }}>50</option>
+                                    <option value="100" {{ $entriesPage == 100 ? 'selected' : '' }}>100</option>
+                                </select>
+                                <span>Entries</span>
+                            </div>
+                            <div class="input-group w-25">
+                                <input type="text" name="search" id="search" class="form-control" value="{{ $search }}" placeholder="Search..." autocomplete="off">
+                                <button type="submit" class="btn-primary px-2"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Kode</th>
+                                    <th class="text-center">Items</th>
+                                    <th class="text-center">Unit</th>
+                                    <th class="text-center">Stock</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($items as $item)
+                                    <tr>
+                                        <td>{{ $item->item_code }}</td>
+                                        <td>{{ $item->item_name }}</td>
+                                        <td>{{ $item->item_unit }}</td>
+                                        <td>{{ $item->item_stock }}</td>
+                                        <td class="text-center">
+                                            <button title="Add to Cart" type="button" class="btn btn-info btn-sm btn-addcart" data-url="{{ route('items.show', $item->id) }}">
+                                                <i class="fas fa-cart-shopping"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center">Kode</th>
+                                    <th class="text-center">Items</th>
+                                    <th class="text-center">Unit</th>
+                                    <th class="text-center">Stock</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    {{ $items->links('pagination::bootstrap-5') }}
                 </div>
-                {{-- {{ $cart }} --}}
+
                 @include('main.pr._directaddcart')
+
+                {{-- Modal Direct Pick-up Cart --}}
                 <div class="modal fade" id="CartModal" role="dialog" aria-labelledby="directCart" aria-hidden="true">
                     <div class="modal-dialog modal-m" role="document">
                         <div class="modal-content">
@@ -91,20 +106,13 @@
                                 @csrf
                                 <input type="hidden" name="cartid" value="{{ $cart->id ?? '' }}">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="directCartLabel"><i
-                                            class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Direct
-                                        Pick-up Cart</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <h5 class="modal-title" id="directCartLabel"><i class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Direct Pick-up Cart</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 </div>
                                 <div class="modal-body overlay-wrapper">
 
-                                    {{-- <div class="overlay">
-                                        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-                                    </div> --}}
-
                                     <ul id="save_errorList" class="alert alert-warning d-none"></ul>
+
                                     <style>
                                         .tablecart {
                                             width: 100%;
@@ -141,7 +149,6 @@
                                             text-align: center;
                                         }
                                     </style>
-                                    {{-- {{ dd($cart) }} --}}
 
                                     <table id="tablecart" class="tablecart">
                                         <tr>
@@ -157,23 +164,17 @@
                                             @endphp
                                             @foreach ($cartdetail as $cartdetail)
                                                 <tr id="row{{ $cartdetail->id }}">
-                                                    {{-- {{ $cart->id }} --}}
                                                     <td width="10px">{{ $cartdetail->items[0]->item_code }}</td>
                                                     <td>{{ $cartdetail->items[0]->item_name }}</td>
                                                     <td>{{ $cartdetail->items[0]->item_unit }}</td>
-                                                    <td><input name="qty[{{ $cartdetail->items[0]->id }}]" type="number"
-                                                            value="{{ $cartdetail->qty }}" size="5"
-                                                            style="width: 3em"
-                                                            max="{{ $cartdetail->items[0]->item_stock }}"></td>
                                                     <td>
-                                                        <center><a href="#" class="btn-delete"
-                                                                data-url="{{ route('cart.delete', $cartdetail->id) }}"
-                                                                uid="row{{ $cartdetail->id }}"><i
-                                                                    class="fas fa-trash"></i></a></center>
+                                                        <input name="qty[{{ $cartdetail->items[0]->id }}]" type="number" value="{{ $cartdetail->qty }}" size="5" style="width: 3em" max="{{ $cartdetail->items[0]->item_stock }}" class="form-control form-control-sm">
                                                     </td>
-                                                    {{-- <td>{{ $cartdetail->item_name }}</td>
-                                            <td>{{ $cartdetail->item_unit }}</td> --}}
-
+                                                    <td class="text-center">
+                                                        <a href="javascript:;" class="text-danger btn-delete" data-url="{{ route('cart.delete', $cartdetail->id) }}" uid="row{{ $cartdetail->id }}">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @else
@@ -181,20 +182,19 @@
                                                 $submitdis = 'disabled';
                                             @endphp
                                             <tr>
-                                                <td colspan="5">
-                                                    <center><i class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Cart empty
-                                                    </center>
+                                                <td class="text-center" colspan="5">
+                                                    <i class="fas fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;Cart empty
                                                 </td>
                                             </tr>
                                         @endif
 
                                         <tr>
                                             <td><b>Purpose</b></td>
-                                            <td colspan="4"><input type="text" name="purpose" id="purpose" required>
+                                            <td colspan="4">
+                                                <input type="text" name="purpose" id="purpose" class="form-control form-control-sm" autocomplete="off" required>
                                             </td>
                                         </tr>
                                     </table>
-
                                 </div>
                                 <div class="modal-footer">
                                     <input type="hidden" name="carttype" value="direct">
@@ -204,18 +204,11 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- /.card-body -->
-
             </div>
-            <!-- /.card -->
-
-
         </div>
     </section>
 @endsection
+
 @section('script')
     <script>
         $(document).on('click', '.btn-delete', function(e) {
@@ -232,9 +225,11 @@
                 }
             });
         });
+
         $(document).on('click', '.btn-cart', function(e) {
             $('#CartModal').modal('show');
         });
+
         $(function() {
             $("#tb_default").DataTable({
                 "responsive": true,

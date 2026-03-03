@@ -4,7 +4,7 @@
             <form action="{{ route('purchase.directadd') }}" method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="directAddCartLabel">Add to Cart</h5>
+                    <h5 class="modal-title">Add to Cart</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -17,32 +17,34 @@
 
                     <ul id="save_errorList" class="alert alert-warning d-none"></ul>
 
-
-                    <div class="form-row mb-4">
-                        <div class="form-group col-md-10">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span id="item_name"></span>
-                                </div>
-                                <div class="col-sm">
-                                    <span id="item_stock"></span>
-                                </div>
-
-                                <div class="col-sm">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Item Name</th>
+                                <th class="text-center">Stock</th>
+                                <th class="text-center">Request</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="item_name"></span></td>
+                                <td class="text-center"><span id="item_stock"></span></td>
+                                <td>
                                     <input type="hidden" name="items_id" id="items_id">
-                                    <input type="number" name="qty" id="qty" size="5" min="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <input type="number" name="qty" id="qty" size="5" min="1" class="form-control form-control-sm" placeholder="0" autocomplete="off">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit">
+                    <input type="submit" class="btn btn-primary">
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 @push('child-scripts')
     <script>
         //accident form
@@ -56,32 +58,13 @@
                 dataType: "json",
                 success: function(response) {
                     if (response.status == 404) {
-                        //toastr.error(response.message);
                         alert(response.message);
                         $('#addCartModal').modal('hide');
                     } else {
-                        // console.log(response);
-                        document.getElementById("qty").setAttribute("max", response.items[0]
-                            .item_stock);
+                        document.getElementById("qty").setAttribute("max", response.items[0].item_stock);
                         document.getElementById("items_id").value = response.items[0].id;
                         document.getElementById("item_name").innerHTML = response.items[0].item_name;
                         document.getElementById("item_stock").innerHTML = response.items[0].item_stock;
-                        var myloginid = document.getElementById("myloginid").innerHTML;
-                        $.ajax({
-                            type: "GET",
-                            url: "http://localhost/esupply/public/cart/direct/" + response
-                                .items[0].id + "/" + myloginid,
-                            dataType: "json",
-                            success: function(resp) {
-                                // alert(resp.status);
-                                document.getElementById("qty").value = resp.qty;
-                                // if (resp.status == 404) {
-                                //     document.getElementById("qty").value = resp.qty;
-                                // } else {
-                                //     document.getElementById("qty").value = resp.qty;
-                                // }
-                            }
-                        });
                         $(".overlay").addClass('d-none');
                     }
                 }
