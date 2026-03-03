@@ -54,7 +54,7 @@ class AdministrationController extends Controller
                     ->orWhere('item_name', 'LIKE', "%$search%");
             });
 
-        $items = $baseQueryItems->orderBy('item_name')->paginate($entriesPage);
+        $items = $baseQueryItems->orderBy('item_name')->paginate($entriesPage)->appends($request->query());
 
         return view('main.admin.master', [
             'entriesPage' => $entriesPage,

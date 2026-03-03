@@ -23,7 +23,7 @@ class UserStockController extends Controller
                     ->orWhere('item_stock', 'LIKE', '%' . $search . '%');
             });
 
-        $items = $baseQueryItems->paginate($entriesPage);
+        $items = $baseQueryItems->paginate($entriesPage)->appends($request->query());
 
         return view('main.stock.index', [
             "title" => "Item Stock",

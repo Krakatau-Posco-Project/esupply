@@ -34,7 +34,7 @@ class PurchaseController extends Controller
                         ->orWhere('item_name', 'LIKE', "%$search%");
                 });
 
-            $items = $baseQueryItems->orderBy('item_name')->paginate($entriesPage);
+            $items = $baseQueryItems->orderBy('item_name')->paginate($entriesPage)->appends($request->query());
 
             $cart = Cart::where('id_user', auth()->user()->id_user_me)->firstWhere('cart_type', 'Direct Pick Up');
             if ($cart) {
