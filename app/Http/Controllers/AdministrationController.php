@@ -96,8 +96,8 @@ class AdministrationController extends Controller
 
         if ($request->file('picture') != '') {
             // Check existing picture
-            $existingPicture = storage_path('app/public/item/' . $item->picture);
-            if ($existingPicture) {
+            $existingPicture = public_path('storage/item/' . $item->picture);
+            if (is_file($existingPicture)) {
                 unlink($existingPicture);
             }
 
